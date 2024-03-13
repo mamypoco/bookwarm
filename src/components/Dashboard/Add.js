@@ -2,9 +2,11 @@ import "./Add.scss";
 import { useState } from "react";
 import { db } from "../../config/firebase";
 import { collection, addDoc } from "firebase/firestore";
+import Swal from "sweetalert2";
 
 const Add = ({ bookList, setBookList, setIsAdding, getBookList }) => {
   //add new book
+  const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [genre, setGenre] = useState("");
@@ -21,6 +23,7 @@ const Add = ({ bookList, setBookList, setIsAdding, getBookList }) => {
     e.preventDefault();
 
     const newBook = {
+      date,
       title,
       author,
       genre,
@@ -45,13 +48,26 @@ const Add = ({ bookList, setBookList, setIsAdding, getBookList }) => {
     setBookList(bookList);
     setIsAdding(false);
     getBookList();
+
+    Swal.fire({
+      icon: "success",
+      title: "Added!",
+      text: `${title} by ${author}'s data has been Added.`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   return (
-    <div className="dashboard-context">
-      <h2>Add a Book</h2>
-      <div className="new-entry-form">
-        <form className="new-entry-form" onSubmit={handleAdd}>
+    <div>
+      <h2>Let's add a book</h2>
+      <div className="add-container">
+        <form className="add-form" onSubmit={handleAdd}>
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
           <input
             placeholder="Title"
             type="text"
@@ -110,12 +126,19 @@ const Add = ({ bookList, setBookList, setIsAdding, getBookList }) => {
             type="text"
             value={sentiment}
           />
-          <div>
+          <div className="add-cancel-buttons">
             <input
+              className="add-button"
               type="submit"
-              value="Submit this book"
+              value="Add"
               name="Submit"
-              className="new-submit-button"
+            />
+            <input
+              className="cancel-button"
+              type="button"
+              value="Cancel"
+              name="Cancel"
+              onClick={() => setIsAdding(false)}
             />
           </div>
         </form>

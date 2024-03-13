@@ -1,7 +1,16 @@
 .App {
+  margin-top: 5rem;
   text-align: center;
 }
 
 body {
   background-color: #eadfb4;
+  justify-content: center;
+}
+
+input[type="button"],
+button {
+  &:hover {
+    cursor: pointer;
+  }
 }

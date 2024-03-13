@@ -1,6 +1,6 @@
 import "./List.scss";
 
-const List = ({ bookList }) => {
+const List = ({ bookList, handleDelete }) => {
   return (
     <div>
       <h2>Your book list:</h2>
@@ -8,10 +8,26 @@ const List = ({ bookList }) => {
       {bookList ? (
         bookList.map((book, key) => (
           <div key={book.id} className="book-card">
-            <div className="title-author">
-              <div className="title">{book.title}</div>
-              <div className="author">by {book.author}</div>
-              <div>💬 {book.sentiment}</div>
+            <div className="title-author-review">
+              <div className="title">
+                {book.title} by {book.author}
+              </div>
+              <div>{book.review}</div>
+            </div>
+            <div className="grid-container">
+              <div className="left-content">
+                <p>💬 {book.sentiment}</p>
+              </div>
+              <div className="right-content">
+                <p>
+                  {book.status} {book.pages} pages {book.lang} {book.format} on{" "}
+                  {book.date}
+                </p>
+              </div>
+              <div className="action-buttons">
+                <button>Edit</button>
+                <button onClick={() => handleDelete(book.id)}>Delete</button>
+              </div>
             </div>
           </div>
         ))

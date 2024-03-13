@@ -12,7 +12,6 @@ function App() {
 
   return (
     <div className="App">
-      <h1>BookWarm</h1>
       {isAuthenticated ? (
         <Dashboard setIsAuthenticated={setIsAuthenticated} />
       ) : (

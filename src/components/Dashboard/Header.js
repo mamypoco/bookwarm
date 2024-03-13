@@ -1,4 +1,5 @@
 import Logout from "../Logout";
+import "./Header.scss";
 
 const Header = ({ setIsAuthenticated, setIsAdding }) => {
   return (
