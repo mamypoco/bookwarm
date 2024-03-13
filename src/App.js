@@ -1,14 +1,23 @@
 import "./App.scss";
-import { Auth } from "./components/auth/Auth";
-import { Dashboard } from "./pages/dashboard/Dashboard";
+import { useEffect, useState } from "react";
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
+
+  useEffect(() => {
+    setIsAuthenticated(JSON.parse(localStorage.getItem("is_authenticated")));
+  }, []);
 
   return (
     <div className="App">
-      <h1>BookWarm Log</h1>
-      <Auth />
-      <Dashboard />
+      <h1>BookWarm</h1>
+      {isAuthenticated ? (
+        <Dashboard setIsAuthenticated={setIsAuthenticated} />
+      ) : (
+        <Login setIsAuthenticated={setIsAuthenticated} />
+      )}
     </div>
   );
 }
