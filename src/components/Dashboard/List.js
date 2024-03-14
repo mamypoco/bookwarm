@@ -1,4 +1,5 @@
 import "./List.scss";
+import Loading from "../Loading/Loading";
 
 const List = ({ bookList, handleDelete, handleEdit }) => {
   return (
@@ -32,7 +33,9 @@ const List = ({ bookList, handleDelete, handleEdit }) => {
           </div>
         ))
       ) : (
-        <div>Loading...</div>
+        <div>
+          <Loading />
+        </div>
       )}
     </div>
   );
