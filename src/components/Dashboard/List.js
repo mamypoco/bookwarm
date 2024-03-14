@@ -1,6 +1,6 @@
 import "./List.scss";
 
-const List = ({ bookList, handleDelete }) => {
+const List = ({ bookList, handleDelete, handleEdit }) => {
   return (
     <div>
       <h2>Your book list:</h2>
@@ -25,7 +25,7 @@ const List = ({ bookList, handleDelete }) => {
                 </p>
               </div>
               <div className="action-buttons">
-                <button>Edit</button>
+                <button onClick={() => handleEdit(book.id)}>Edit</button>
                 <button onClick={() => handleDelete(book.id)}>Delete</button>
               </div>
             </div>

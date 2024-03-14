@@ -1,15 +1,19 @@
+import "./Dashboard.scss";
 import { useState, useEffect } from "react";
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../config/firebase";
+
 import Header from "./Header";
 import List from "./List";
 import Add from "./Add";
-import "./Dashboard.scss";
+import Edit from "./Edit";
 import Swal from "sweetalert2";
 
 const Dashboard = ({ setIsAuthenticated }) => {
   const [bookList, setBookList] = useState();
+  const [selectedBook, setSelectedBook] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const booksCollectionRef = collection(db, "books");
   //getDocs
@@ -29,6 +33,13 @@ const Dashboard = ({ setIsAuthenticated }) => {
   useEffect(() => {
     getBookList(); //call the function
   }, []);
+
+  const handleEdit = (id) => {
+    const [book] = bookList.filter((book) => book.id === id);
+
+    setSelectedBook(book);
+    setIsEditing(true);
+  };
 
   const handleDelete = async (id) => {
     Swal.fire({
@@ -58,13 +69,17 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   return (
     <div className="dashboard-container">
-      {!isAdding && (
+      {!isAdding && !isEditing && (
         <div>
           <Header
             setIsAdding={setIsAdding}
             setIsAuthenticated={setIsAuthenticated}
           />
-          <List bookList={bookList} handleDelete={handleDelete} />
+          <List
+            bookList={bookList}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+          />
         </div>
       )}
       {isAdding && (
@@ -73,6 +88,15 @@ const Dashboard = ({ setIsAuthenticated }) => {
           bookList={bookList}
           setBookList={setBookList}
           getBookList={getBookList}
+        />
+      )}
+      {isEditing && (
+        <Edit
+          bookList={bookList}
+          getBookList={getBookList}
+          selectedBook={selectedBook}
+          setBookList={setBookList}
+          setIsEditing={setIsEditing}
         />
       )}
     </div>

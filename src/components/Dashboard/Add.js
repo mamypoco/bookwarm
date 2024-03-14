@@ -97,8 +97,8 @@ const Add = ({ bookList, setBookList, setIsAdding, getBookList }) => {
           />
           <input
             placeholder="Pages"
-            onChange={(e) => setPages(Number(e.target.value))}
-            type="number"
+            onChange={(e) => setPages(e.target.value)}
+            type="text"
             value={pages}
           />
 
