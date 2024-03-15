@@ -1,9 +1,13 @@
+.list-container {
+  text-align: center;
+}
+
 .book-card {
   text-align: left;
-  margin: 1rem 10rem;
+
+  margin: 1rem auto;
   width: 60%;
   padding: 0.5rem 1rem;
-  align-items: center;
   border: 1px solid gray;
   border-radius: 5px;
   background-color: rgb(145, 140, 140);
@@ -14,10 +18,16 @@
   grid-template-columns: 5fr 1fr;
 }
 
-.action-buttons {
+.title-author {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.list-action-buttons {
   text-align: center;
 }
-// .grid-container {
-//   display: grid;
-//   grid-template-columns: 1fr 3fr 2fr;
-// }
+
+.list-action-buttons button {
+  margin-right: 0.5rem;
+  width: 10rem;
+}

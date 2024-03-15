@@ -1,11 +1,21 @@
-.App {
-  margin-top: 3rem;
-  text-align: center;
-}
+// .App {
+//   margin-top: 3rem;
+//   text-align: center;
+// }
 
 body {
   background-color: #eadfb4;
-  justify-content: center;
+  //   justify-content: center;
+}
+
+input,
+select,
+textarea {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: none;
+  box-sizing: border-box;
+  width: 70%;
 }
 
 input[type="button"],

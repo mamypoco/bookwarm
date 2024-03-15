@@ -1,22 +1,22 @@
 .login-container {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 7rem auto;
+  align-items: center;
+  width: 20rem;
 }
 
-form {
-  display: grid;
-  flex-direction: center;
-  place-items: center;
-  width: 15rem;
-}
-
-input,
+.login-form input,
 button {
   margin: 0.3rem;
   padding: 0.5rem;
   border-radius: 4px;
   border: none;
-  //   width: 10rem;
+  width: 15rem;
+}
+
+.login-form input:hover {
+  border: 1px solid black;
 }
 
 .login-submit-button {
@@ -26,4 +26,5 @@ button {
 
 .google-signin-button {
   background: orange;
+  width: 15rem;
 }

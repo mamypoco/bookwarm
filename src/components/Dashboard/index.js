@@ -1,12 +1,12 @@
-import "./Dashboard.scss";
+import "./index.scss";
 import { useState, useEffect } from "react";
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
-import Header from "./Header";
-import List from "./List";
-import Add from "./Add";
-import Edit from "./Edit";
+import Header from "./Header/header";
+import List from "./List/list";
+import Add from "./Add/add";
+import Edit from "./Edit/edit";
 import Swal from "sweetalert2";
 
 const Dashboard = ({ setIsAuthenticated }) => {

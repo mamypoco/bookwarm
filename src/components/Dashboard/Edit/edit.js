@@ -1,7 +1,7 @@
-import "./Edit.scss";
+import "./edit.scss";
 import { useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../config/firebase";
+import { db } from "../../../config/firebase";
 import Swal from "sweetalert2";
 
 const Edit = ({
@@ -57,7 +57,7 @@ const Edit = ({
   };
 
   return (
-    <div className="add-container">
+    <div className="edit-container">
       <form className="add-form" onSubmit={handleUpdate}>
         <h1>Edit Your Book</h1>
         <input

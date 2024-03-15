@@ -1,0 +1,33 @@
+.add-container {
+  text-align: center;
+}
+
+.add-form {
+  input,
+  textarea,
+  button {
+    margin: 0 auto;
+    width: 20rem;
+    margin-top: 0.2rem;
+    &:hover {
+      border: 1px solid black;
+    }
+  }
+}
+
+.add-cancel-buttons {
+  margin: auto;
+}
+.submit-add-button {
+  padding: 0.5rem;
+  color: white;
+  background: black;
+  //   margin: 1rem 0;
+}
+
+.submit-add-cancel-button {
+  padding: 0.5rem;
+  //   color: black;
+  //   background: white;
+  //   margin: 1rem 0;
+}

@@ -1,7 +1,12 @@
+.edit-container {
+  display: flex;
+  justify-content: center;
+}
+
 .add-form {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 0.3rem;
   margin: 0 auto;
   text-align: left;

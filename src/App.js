@@ -1,7 +1,7 @@
 import "./App.scss";
 import { useEffect, useState } from "react";
-import Login from "./components/Login";
-import Dashboard from "./components/Dashboard/Dashboard";
+import Login from "./components/Login/login";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);

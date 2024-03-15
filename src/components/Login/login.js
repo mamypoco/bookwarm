@@ -5,13 +5,12 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
-import "./index.scss";
+import "./login.scss";
 import Swal from "sweetalert2";
 
 const Login = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //   const [isloggedIn, setLoggedin] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -67,24 +66,30 @@ const Login = ({ setIsAuthenticated }) => {
   return (
     <div className="login-container">
       <h1>BookWarm</h1>
-      <form className="form-container" onSubmit={handleLogin}>
-        <input
-          placeholder="Email"
-          autoComplete="email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          placeholder="password"
-          autoComplete="password"
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-        />
-        <input
-          type="submit"
-          className="login-submit-button"
-          value="Login"
-          name="Login"
-        />
+      <form className="login-form" onSubmit={handleLogin}>
+        <div className="row-div">
+          <input
+            placeholder="Email"
+            autoComplete="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="row-div">
+          <input
+            placeholder="password"
+            autoComplete="password"
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+          />
+        </div>
+        <div className="row-div">
+          <input
+            type="submit"
+            className="login-submit-button"
+            value="Login"
+            name="Login"
+          />
+        </div>
       </form>
       <button className="google-signin-button" onClick={loginWithGoogle}>
         Login With Google

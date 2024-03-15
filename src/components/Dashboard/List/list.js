@@ -1,16 +1,16 @@
-import "./List.scss";
-import Loading from "../Loading/Loading";
+import "./list.scss";
+import Loading from "../../Loading/loading";
 
 const List = ({ bookList, handleDelete, handleEdit }) => {
   return (
-    <div>
-      <h2>Your book list:</h2>
+    <div className="list-container">
+      <h2>Your Bookshelf:</h2>
 
       {bookList ? (
         bookList.map((book, key) => (
           <div key={book.id} className="book-card">
             <div className="title-author-review">
-              <div className="title">
+              <div className="title-author">
                 {book.title} by {book.author}
               </div>
               <div>{book.review}</div>
@@ -25,7 +25,7 @@ const List = ({ bookList, handleDelete, handleEdit }) => {
                   {book.date}
                 </p>
               </div>
-              <div className="action-buttons">
+              <div className="list-action-buttons">
                 <button onClick={() => handleEdit(book.id)}>Edit</button>
                 <button onClick={() => handleDelete(book.id)}>Delete</button>
               </div>
