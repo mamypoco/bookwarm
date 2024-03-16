@@ -3,18 +3,19 @@ import { useState } from "react";
 import { db } from "../../../config/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import Swal from "sweetalert2";
+import Rating from "../../Rating/rating";
 
 const Add = ({ bookList, setBookList, setIsAdding, getBookList }) => {
   //add new book
   const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  //   const [genre, setGenre] = useState("");
+  const [genre, setGenre] = useState("");
   const [lang, setLang] = useState("");
   const [pages, setPages] = useState("");
   const [format, setFormat] = useState("");
   const [status, setStatus] = useState("");
-  const [review, setReview] = useState("");
+  const [rating, setRating] = useState("");
   const [sentiment, setSentiment] = useState("");
 
   const booksCollectionRef = collection(db, "books");
@@ -26,12 +27,12 @@ const Add = ({ bookList, setBookList, setIsAdding, getBookList }) => {
       date,
       title,
       author,
-      // genre,
+      genre,
       lang,
       pages,
       format,
       status,
-      review,
+      rating,
       sentiment,
     };
 
@@ -48,6 +49,7 @@ const Add = ({ bookList, setBookList, setIsAdding, getBookList }) => {
     setBookList(bookList);
     setIsAdding(false);
     getBookList();
+    console.log("rating:", rating);
 
     Swal.fire({
       icon: "success",
@@ -80,15 +82,21 @@ const Add = ({ bookList, setBookList, setIsAdding, getBookList }) => {
             type="text"
             value={author}
           />
-          {/* <select onChange={(e) => setGenre(e.target.value)} id="genre">
+          <select
+            placeholder="Select Genre"
+            onChange={(e) => setGenre(e.target.value)}
+            id="genre"
+          >
             <option value="">Select Genre...</option>
             <option value="novel">Novel</option>
-            <option value="fiction">Fiction</option>
-            <option value="Documentary">Documentary</option>
-            <option value="sf">Science Fiction</option>
-            <option value="know-how">Know How</option>
+            <option value="non-fiction">Non-fiction</option>
+            <option value="mystery">Mystery</option>
+            <option value="science-fiction">Science Fiction</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="know-how">Know-how</option>
+            <option value="manga">Manga</option>
             <option value="Others">Others</option>
-          </select> */}
+          </select>
           <input
             placeholder="EN or JP"
             onChange={(e) => setLang(e.target.value)}
@@ -114,18 +122,28 @@ const Add = ({ bookList, setBookList, setIsAdding, getBookList }) => {
             type="text"
             value={status}
           />
-          <input
-            placeholder="Review: 1-5 for stars"
-            onChange={(e) => setReview(Number(e.target.value))}
+          {/* <input
+            placeholder="Rating: 1-5 stars (higher is better)"
+            onChange={(e) => setRating(Number(e.target.value))}
             type="number"
-            value={review}
-          />
+            value={rating}
+          /> */}
+
           <textarea
             placeholder="Your sentiment"
             onChange={(e) => setSentiment(e.target.value)}
             type="text"
             value={sentiment}
           />
+          <div className="rating-container">
+            <p>Please rate:</p>
+            <Rating
+              starRagin={rating}
+              setStarRating={setRating}
+              currentRating={rating}
+              handleOnChange={(e) => setRating(Number(e.target.value))}
+            />
+          </div>
           <div className="add-cancel-buttons">
             <input
               className="submit-add-button"

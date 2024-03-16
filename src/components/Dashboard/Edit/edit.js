@@ -20,7 +20,7 @@ const Edit = ({
   const [pages, setPages] = useState(selectedBook.pages);
   const [format, setFormat] = useState(selectedBook.format);
   const [status, setStatus] = useState(selectedBook.status);
-  const [review, setReview] = useState(selectedBook.review);
+  const [rating, setRating] = useState(selectedBook.rating);
   const [sentiment, setSentiment] = useState(selectedBook.sentiment);
 
   const handleUpdate = async (e) => {
@@ -35,7 +35,7 @@ const Edit = ({
       pages,
       format,
       status,
-      review,
+      rating,
       sentiment,
     };
 
@@ -92,22 +92,22 @@ const Edit = ({
         />
 
         <input
-          placeholder="Format"
+          placeholder="Format: book, ebook, or audiobook"
           onChange={(e) => setFormat(e.target.value)}
           type="text"
           value={format}
         />
         <input
-          placeholder="Status"
+          placeholder="Status: read or reading"
           onChange={(e) => setStatus(e.target.value)}
           type="text"
           value={status}
         />
         <input
-          placeholder="Review 1-5"
-          onChange={(e) => setReview(e.target.value)}
+          placeholder="Review: 1-5 stars"
+          onChange={(e) => setRating(e.target.value)}
           type="text"
-          value={review}
+          value={rating}
         />
         <textarea
           placeholder="Your sentiment"

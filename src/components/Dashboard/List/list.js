@@ -1,5 +1,7 @@
 import "./list.scss";
 import Loading from "../../Loading/loading";
+import commentIcon from "../../../assets/icons/comment.svg";
+import Rating from "../../Rating/rating";
 
 const List = ({ bookList, handleDelete, handleEdit }) => {
   return (
@@ -13,16 +15,18 @@ const List = ({ bookList, handleDelete, handleEdit }) => {
               <div className="title-author">
                 {book.title} by {book.author}
               </div>
-              <div>{book.review}</div>
+              <div>{book.rating}</div>
+              <Rating starRating={book.rating} />
             </div>
             <div className="grid-container">
-              <div className="left-content">
-                <p>💬 {book.sentiment}</p>
+              <div className="comment-container">
+                <img className="comment-icon" src={commentIcon} alt="comment" />
+                <p>{book.sentiment}</p>
               </div>
               <div className="right-content">
                 <p>
-                  {book.status} {book.pages} pages {book.lang} {book.format} on{" "}
-                  {book.date}
+                  {book.status} {book.pages} pages {book.lang} {book.format} (
+                  {book.genre}) on {book.date}
                 </p>
               </div>
               <div className="list-action-buttons">

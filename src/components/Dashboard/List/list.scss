@@ -2,14 +2,24 @@
   text-align: center;
 }
 
+.comment-container {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.comment-icon {
+  margin-top: 0.7rem;
+  width: 2rem;
+  height: 2rem;
+}
+
 .book-card {
   text-align: left;
-
   margin: 1rem auto;
   width: 60%;
   padding: 0.5rem 1rem;
   border: 1px solid gray;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: rgb(145, 140, 140);
 }
 
@@ -30,4 +40,7 @@
 .list-action-buttons button {
   margin-right: 0.5rem;
   width: 10rem;
+  &:hover {
+    border: 1px solid black;
+  }
 }

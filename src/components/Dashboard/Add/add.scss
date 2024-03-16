@@ -5,6 +5,7 @@
 .add-form {
   input,
   textarea,
+  select,
   button {
     margin: 0 auto;
     width: 20rem;
@@ -12,6 +13,17 @@
     &:hover {
       border: 1px solid black;
     }
+  }
+}
+
+.rating-container {
+  margin: 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  p {
+    padding-bottom: 0.25rem;
   }
 }
 
