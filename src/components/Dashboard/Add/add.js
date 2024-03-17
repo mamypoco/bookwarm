@@ -5,7 +5,14 @@ import { collection, addDoc } from "firebase/firestore";
 import Swal from "sweetalert2";
 import Rating from "../../Rating/rating";
 
-const Add = ({ bookList, setBookList, setIsAdding, getBookList }) => {
+const Add = ({
+  bookList,
+  setBookList,
+  setIsAdding,
+  getBookList,
+  rating,
+  setRating,
+}) => {
   //add new book
   const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
@@ -15,7 +22,7 @@ const Add = ({ bookList, setBookList, setIsAdding, getBookList }) => {
   const [pages, setPages] = useState("");
   const [format, setFormat] = useState("");
   const [status, setStatus] = useState("");
-  const [rating, setRating] = useState("");
+  //   const [rating, setRating] = useState("");
   const [sentiment, setSentiment] = useState("");
 
   const booksCollectionRef = collection(db, "books");
@@ -133,13 +140,14 @@ const Add = ({ bookList, setBookList, setIsAdding, getBookList }) => {
             placeholder="Your sentiment"
             onChange={(e) => setSentiment(e.target.value)}
             type="text"
+            rows={7}
             value={sentiment}
           />
           <div className="rating-container">
-            <p>Please rate:</p>
+            <p>Your rating:</p>
             <Rating
-              starRagin={rating}
-              setStarRating={setRating}
+              rating={rating}
+              setRating={setRating}
               currentRating={rating}
               handleOnChange={(e) => setRating(Number(e.target.value))}
             />

@@ -11,13 +11,13 @@ const List = ({ bookList, handleDelete, handleEdit }) => {
       {bookList ? (
         bookList.map((book, key) => (
           <div key={book.id} className="book-card">
-            <div className="title-author-review">
-              <div className="title-author">
-                {book.title} by {book.author}
-              </div>
-              <div>{book.rating}</div>
-              <Rating starRating={book.rating} />
+            <div className="title-author">
+              {book.title} by {book.author}
             </div>
+            <div>{book.rating}</div>
+            {/* <Rating starRating={book.rating} /> */}
+            <Rating rating={book.rating} />
+
             <div className="grid-container">
               <div className="comment-container">
                 <img className="comment-icon" src={commentIcon} alt="comment" />

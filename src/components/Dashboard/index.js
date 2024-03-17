@@ -14,7 +14,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
   const [selectedBook, setSelectedBook] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [starRating, setStarRating] = useState(null);
+  const [rating, setRating] = useState(null);
 
   const booksCollectionRef = collection(db, "books");
   //getDocs
@@ -89,8 +89,8 @@ const Dashboard = ({ setIsAuthenticated }) => {
           bookList={bookList}
           setBookList={setBookList}
           getBookList={getBookList}
-          rating={starRating}
-          setRating={setStarRating}
+          rating={rating}
+          setRating={setRating}
         />
       )}
       {isEditing && (
@@ -100,6 +100,8 @@ const Dashboard = ({ setIsAuthenticated }) => {
           selectedBook={selectedBook}
           setBookList={setBookList}
           setIsEditing={setIsEditing}
+          rating={rating}
+          setRating={setRating}
         />
       )}
     </div>

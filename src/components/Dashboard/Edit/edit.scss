@@ -22,6 +22,18 @@ textarea {
   box-sizing: border-box;
   width: 70%;
 }
+.rating-container {
+  margin: 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  p {
+    padding-bottom: 0.25rem;
+    margin: 0.5rem;
+    color: #5a5858;
+  }
+}
 
 .add-cancel-buttons {
   display: flex;

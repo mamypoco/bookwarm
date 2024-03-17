@@ -3,6 +3,7 @@ import { useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 import Swal from "sweetalert2";
+import Rating from "../../Rating/rating";
 
 const Edit = ({
   bookList,
@@ -10,6 +11,8 @@ const Edit = ({
   setBookList,
   setIsEditing,
   getBookList,
+  rating,
+  setRating,
 }) => {
   const id = selectedBook.id;
 
@@ -20,7 +23,7 @@ const Edit = ({
   const [pages, setPages] = useState(selectedBook.pages);
   const [format, setFormat] = useState(selectedBook.format);
   const [status, setStatus] = useState(selectedBook.status);
-  const [rating, setRating] = useState(selectedBook.rating);
+  //   const [rating, setRating] = useState(selectedBook.rating);
   const [sentiment, setSentiment] = useState(selectedBook.sentiment);
 
   const handleUpdate = async (e) => {
@@ -103,18 +106,28 @@ const Edit = ({
           type="text"
           value={status}
         />
-        <input
+        {/* <input
           placeholder="Review: 1-5 stars"
           onChange={(e) => setRating(e.target.value)}
           type="text"
           value={rating}
-        />
+        /> */}
         <textarea
           placeholder="Your sentiment"
           onChange={(e) => setSentiment(e.target.value)}
           type="text"
+          rows={7}
           value={sentiment}
         />
+        <div className="rating-container">
+          <p>Your rating:</p>
+          <Rating
+            rating={rating}
+            setRating={setRating}
+            // currentRating={rating}
+            handleOnChange={(e) => setRating(Number(e.target.value))}
+          />
+        </div>
         <div className="add-cancel-buttons">
           <input
             className="add-button"

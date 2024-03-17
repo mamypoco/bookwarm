@@ -20,10 +20,12 @@
   margin: 0 1rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 
   p {
     padding-bottom: 0.25rem;
+    margin: 0.5rem;
+    color: #5a5858;
   }
 }
 
