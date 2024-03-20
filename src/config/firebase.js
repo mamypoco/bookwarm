@@ -4,13 +4,13 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBAE39j-90pZvK4HQCcDX9B-5GwkmnwVSQ",
-  authDomain: "bookwarm-d2f36.firebaseapp.com",
-  projectId: "bookwarm-d2f36",
-  storageBucket: "bookwarm-d2f36.appspot.com",
-  messagingSenderId: "701169565870",
-  appId: "1:701169565870:web:77217227f053b5609c6d3f",
-  measurementId: "G-2KZVXHPRER",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_API_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_API_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
 // Initialize authentication

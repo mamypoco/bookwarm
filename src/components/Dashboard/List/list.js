@@ -15,7 +15,7 @@ const List = ({ bookList, handleDelete, handleEdit }) => {
               {book.title} by {book.author}
             </div>
             <div>{book.rating}</div>
-            {/* <Rating starRating={book.rating} /> */}
+            {/* rating component here */}
             <Rating rating={book.rating} />
 
             <div className="grid-container">

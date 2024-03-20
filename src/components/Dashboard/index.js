@@ -14,7 +14,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
   const [selectedBook, setSelectedBook] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [rating, setRating] = useState(null);
+  const [rating, setRating] = useState(null); //use in add, edit and list
 
   const booksCollectionRef = collection(db, "books");
   //getDocs

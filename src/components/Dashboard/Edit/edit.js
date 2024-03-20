@@ -124,7 +124,7 @@ const Edit = ({
           <Rating
             rating={rating}
             setRating={setRating}
-            // currentRating={rating}
+            currentRating={rating}
             handleOnChange={(e) => setRating(Number(e.target.value))}
           />
         </div>
