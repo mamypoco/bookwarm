@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { auth, googleProvider } from "../../config/firebase";
 import {
-  //   createUserWithEmailAndPassword,
+  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
@@ -53,6 +53,32 @@ const Login = ({ setIsAuthenticated }) => {
     }
   };
 
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      Swal.fire({
+        timer: 1500,
+        showConfirmButton: false,
+        willOpen: () => {
+          Swal.showLoading();
+        },
+        willClose: () => {
+          setIsAuthenticated(true);
+
+          Swal.fire({
+            icon: "success",
+            title: "Successfully registered and logged in!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const loginWithGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
@@ -66,7 +92,12 @@ const Login = ({ setIsAuthenticated }) => {
   return (
     <div className="login-container">
       <h1>BookWarm</h1>
-      <form className="login-form" onSubmit={handleLogin}>
+      <form
+        className="login-form"
+        onSubmit={
+          document.activeElement.name === "Login" ? handleLogin : handleRegister
+        }
+      >
         <div className="row-div">
           <input
             placeholder="Email"
@@ -88,6 +119,14 @@ const Login = ({ setIsAuthenticated }) => {
             className="login-submit-button"
             value="Login"
             name="Login"
+          />
+        </div>
+        <div className="row-div">
+          <input
+            className="register-submit-button"
+            type="submit"
+            value="Register"
+            name="Register"
           />
         </div>
       </form>
