@@ -19,6 +19,7 @@ const Edit = ({
   const [date, setDate] = useState(selectedBook.date);
   const [title, setTitle] = useState(selectedBook.title);
   const [author, setAuthor] = useState(selectedBook.author);
+  const [genre, setGenre] = useState(selectedBook.genre);
   const [lang, setLang] = useState(selectedBook.lang);
   const [pages, setPages] = useState(selectedBook.pages);
   const [format, setFormat] = useState(selectedBook.format);
@@ -34,6 +35,7 @@ const Edit = ({
       date,
       title,
       author,
+      genre,
       lang,
       pages,
       format,
@@ -80,6 +82,22 @@ const Edit = ({
           type="text"
           value={author}
         />
+        <select
+          placeholder="Select Genre"
+          onChange={(e) => setGenre(e.target.value)}
+          id="genre"
+          value={genre}
+        >
+          <option value="">Select Genre...</option>
+          <option value="novel">Novel</option>
+          <option value="non-fiction">Non-fiction</option>
+          <option value="mystery">Mystery</option>
+          <option value="science-fiction">Science Fiction</option>
+          <option value="fantasy">Fantasy</option>
+          <option value="know-how">Know-how</option>
+          <option value="manga">Manga</option>
+          <option value="Others">Others</option>
+        </select>
 
         <input
           placeholder="EN or JP"

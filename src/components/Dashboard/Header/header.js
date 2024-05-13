@@ -4,7 +4,7 @@ import "./header.scss";
 const Header = ({ setIsAuthenticated, setIsAdding }) => {
   return (
     <div className="header-container">
-      <h1>Your Dashboard</h1>
+      <h1>Hello, here is your dashboard</h1>
       <div className="header-action-buttons">
         <button className="header-add-button" onClick={() => setIsAdding(true)}>
           Add a book

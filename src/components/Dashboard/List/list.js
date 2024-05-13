@@ -6,8 +6,6 @@ import Rating from "../../Rating/rating";
 const List = ({ bookList, handleDelete, handleEdit }) => {
   return (
     <div className="list-container">
-      <h2>Your Bookshelf:</h2>
-
       {bookList ? (
         bookList.map((book, key) => (
           <div key={book.id} className="book-card">
