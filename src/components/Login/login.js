@@ -4,7 +4,10 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
+  updateProfile,
 } from "firebase/auth";
+import { setDoc, doc } from "firebase/firestore";
+
 import "./login.scss";
 import Swal from "sweetalert2";
 
@@ -56,24 +59,69 @@ const Login = ({ setIsAuthenticated }) => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      Swal.fire({
-        timer: 1500,
-        showConfirmButton: false,
-        willOpen: () => {
-          Swal.showLoading();
+      //prompt user to enter their name
+      const { value: name } = await Swal.fire({
+        title: "Enter your name",
+        input: "text",
+        inputLabel: "Name",
+        inputPlaceholder: "Enter your name",
+        inputValidator: (value) => {
+          if (!value) {
+            return "You need to enter your name!";
+          }
         },
-        willClose: () => {
-          setIsAuthenticated(true);
-
-          Swal.fire({
-            icon: "success",
-            title: "Successfully registered and logged in!",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        },
+        showCancelButton: true,
+        cancelButtonText: "Cancel",
+        confirmButtonText: "Register",
+        allowOUtsideClick: false,
       });
+      if (name) {
+        //create user with email and password
+        const { user } = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        //update user profile with name
+        await updateProfile(user, {
+          displayName: name,
+        });
+
+        //store user info in Firestore
+        //   await db.collection("users").doc(user.uid).set({
+        //     displayName: name,
+        //   });
+        await setDoc(doc(db, "users", user.uid), {
+          displayName: name,
+          email: user.email,
+        });
+
+        setIsAuthenticated(true);
+        Swal.fire({
+          icon: "success",
+          title: "Successfully registered and logged in!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+
+      // Swal.fire({
+      //   timer: 1500,
+      //   showConfirmButton: false,
+      //   willOpen: () => {
+      //     Swal.showLoading();
+      //   },
+      //   willClose: () => {
+      //     setIsAuthenticated(true);
+
+      //     Swal.fire({
+      //       icon: "success",
+      //       title: "Successfully registered and logged in!",
+      //       showConfirmButton: false,
+      //       timer: 1500,
+      //     });
+      //   },
+      // });
     } catch (error) {
       console.log(error);
     }
@@ -99,6 +147,9 @@ const Login = ({ setIsAuthenticated }) => {
           document.activeElement.name === "Login" ? handleLogin : handleRegister
         }
       >
+        <button className="google-signin-button" onClick={loginWithGoogle}>
+          Login With Google
+        </button>
         <div className="row-div">
           <input
             placeholder="Email"
@@ -114,23 +165,21 @@ const Login = ({ setIsAuthenticated }) => {
             type="password"
           />
         </div>
-        <button className="google-signin-button" onClick={loginWithGoogle}>
-          Login With Google
-        </button>
-        <div className="row-div">
-          <input
-            type="submit"
-            className="login-submit-button"
-            value="Login"
-            name="Login"
-          />
-        </div>
+
         <div className="row-div">
           <input
             className="register-submit-button"
             type="submit"
             value="Register"
             name="Register"
+          />
+        </div>
+        <div className="row-div">
+          <input
+            type="submit"
+            className="login-submit-button"
+            value="Login"
+            name="Login"
           />
         </div>
       </form>

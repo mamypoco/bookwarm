@@ -56,11 +56,6 @@ const Dashboard = ({ setIsAuthenticated }) => {
       const booksData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
-        // const q = query(booksCollectionRef, where("userId", "==", userId));
-        // const querySnapshot = await getDocs(q);
-        // const booksData = querySnapshot.docs.map((doc) => ({
-        //   id: doc.id,
-        //   ...doc.data(),
       }));
       setBookList(booksData);
     } catch (error) {
@@ -72,7 +67,11 @@ const Dashboard = ({ setIsAuthenticated }) => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
-        setUserName(user.displayName.split(" ")[0]);
+        if (user.displayName) {
+          setUserName(user.displayName.split(" ")[0]);
+        } else {
+          setUserName(user.email);
+        }
         fetchBooks(user.uid);
       } else {
         setIsAuthenticated(false);
