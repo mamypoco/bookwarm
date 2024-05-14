@@ -1,10 +1,10 @@
 import Logout from "../../Logout/logout";
 import "./header.scss";
 
-const Header = ({ setIsAuthenticated, setIsAdding }) => {
+const Header = ({ setIsAuthenticated, setIsAdding, userName }) => {
   return (
     <div className="header-container">
-      <h1>Hello, here is your dashboard</h1>
+      <h1>Welcome, {userName}!</h1>
       <div className="header-action-buttons">
         <button className="header-add-button" onClick={() => setIsAdding(true)}>
           Add a book

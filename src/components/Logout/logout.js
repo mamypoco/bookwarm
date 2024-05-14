@@ -4,16 +4,15 @@ import Swal from "sweetalert2";
 
 const Logout = ({ setIsAuthenticated }) => {
   const handleLogout = () => {
-    signOut(auth).then(() => {
-      Swal.fire({
-        icon: "question",
-        title: "Logging Out",
-        text: "Are you sure you want to log out?",
-        showCancelButton: true,
-
-        confirmButtonText: "Yes",
-      }).then((result) => {
-        if (result.value) {
+    Swal.fire({
+      icon: "question",
+      title: "Logging Out",
+      text: "Are you sure you want to log out?",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        signOut(auth).then(() => {
           Swal.fire({
             timer: 1500,
             showConfirmButton: false,
@@ -24,8 +23,8 @@ const Logout = ({ setIsAuthenticated }) => {
               setIsAuthenticated(false);
             },
           });
-        }
-      });
+        });
+      }
     });
   };
 

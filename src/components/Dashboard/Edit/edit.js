@@ -10,7 +10,8 @@ const Edit = ({
   selectedBook,
   setBookList,
   setIsEditing,
-  getBookList,
+  fetchBooks,
+  //   getBookList,
   rating,
   setRating,
 }) => {
@@ -50,7 +51,8 @@ const Edit = ({
 
     setBookList(bookList);
     setIsEditing(false);
-    getBookList();
+    fetchBooks();
+    //  getBookList();
 
     Swal.fire({
       icon: "success",
@@ -124,12 +126,7 @@ const Edit = ({
           type="text"
           value={status}
         />
-        {/* <input
-          placeholder="Review: 1-5 stars"
-          onChange={(e) => setRating(e.target.value)}
-          type="text"
-          value={rating}
-        /> */}
+
         <textarea
           placeholder="Your sentiment"
           onChange={(e) => setSentiment(e.target.value)}

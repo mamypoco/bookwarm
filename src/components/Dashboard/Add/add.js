@@ -1,6 +1,6 @@
 import "./add.scss";
 import { useState } from "react";
-import { db } from "../../../config/firebase";
+import { db, auth } from "../../../config/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import Swal from "sweetalert2";
 import Rating from "../../Rating/rating";
@@ -9,7 +9,8 @@ const Add = ({
   bookList,
   setBookList,
   setIsAdding,
-  getBookList,
+  fetchBooks,
+  //   getBookList,
   rating,
   setRating,
 }) => {
@@ -45,18 +46,26 @@ const Add = ({
 
     bookList.push(newBook);
 
+    const user = auth.currentUser;
+    if (!user) {
+      console.error("user not found");
+      return;
+    }
+
     try {
-      await addDoc(booksCollectionRef, {
+      await addDoc(collection(db, `users/${user.uid}/booksCollection`), {
         ...newBook,
       });
-      console.log("document written with ID: ", booksCollectionRef.id);
-    } catch (err) {
-      console.error(err);
+      console.log("document written with ID: ", booksCollectionRef.id, user);
+
+      setBookList(bookList);
+      setIsAdding(false);
+      fetchBooks(user.uid);
+      //  getBookList();
+      console.log("rating:", rating);
+    } catch (error) {
+      console.error("Error adding document:", error);
     }
-    setBookList(bookList);
-    setIsAdding(false);
-    getBookList();
-    console.log("rating:", rating);
 
     Swal.fire({
       icon: "success",
@@ -129,12 +138,6 @@ const Add = ({
             type="text"
             value={status}
           />
-          {/* <input
-            placeholder="Rating: 1-5 stars (higher is better)"
-            onChange={(e) => setRating(Number(e.target.value))}
-            type="number"
-            value={rating}
-          /> */}
 
           <textarea
             placeholder="Your sentiment"

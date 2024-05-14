@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { auth, googleProvider, db } from "../../config/firebase";
 import {
   createUserWithEmailAndPassword,
@@ -8,10 +8,9 @@ import {
 import "./login.scss";
 import Swal from "sweetalert2";
 
-const Login = ({ setIsAuthenticated, isAuthenticated }) => {
+const Login = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //   const [userData, setUserData] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -90,26 +89,6 @@ const Login = ({ setIsAuthenticated, isAuthenticated }) => {
     }
   };
 
-  //   useEffect(() => {
-  //     if (isAuthenticated) {
-  //       const userRef = db("users").doc(auth.currentUser.uid);
-  //       userRef
-  //         .get()
-  //         .then((doc) => {
-  //           if (doc.exists) {
-  //             // Set userData directly into state
-  //             setUserData(doc.data());
-  //             console.log("userData:", userData);
-  //           } else {
-  //             console.log("User data not found");
-  //           }
-  //         })
-  //         .catch((err) => {
-  //           console.log(err.message);
-  //         });
-  //     }
-  //   }, [isAuthenticated, userData]);
-
   return (
     <div className="login-container">
       <h1>BookWarm</h1>
@@ -135,6 +114,9 @@ const Login = ({ setIsAuthenticated, isAuthenticated }) => {
             type="password"
           />
         </div>
+        <button className="google-signin-button" onClick={loginWithGoogle}>
+          Login With Google
+        </button>
         <div className="row-div">
           <input
             type="submit"
@@ -152,9 +134,6 @@ const Login = ({ setIsAuthenticated, isAuthenticated }) => {
           />
         </div>
       </form>
-      <button className="google-signin-button" onClick={loginWithGoogle}>
-        Login With Google
-      </button>
     </div>
   );
 };

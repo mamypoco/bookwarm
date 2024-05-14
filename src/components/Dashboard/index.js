@@ -1,7 +1,15 @@
 import "./index.scss";
 import { useState, useEffect } from "react";
-import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  deleteDoc,
+  doc,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../../config/firebase";
+import { auth } from "../../config/firebase";
 
 import Header from "./Header/header";
 import List from "./List/list";
@@ -10,29 +18,67 @@ import Edit from "./Edit/edit";
 import Swal from "sweetalert2";
 
 const Dashboard = ({ setIsAuthenticated }) => {
+  const [user, setUser] = useState(null);
+  const [userName, setUserName] = useState("");
   const [bookList, setBookList] = useState();
   const [selectedBook, setSelectedBook] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [rating, setRating] = useState(null); //moved the state up from add, edit and list
 
-  const booksCollectionRef = collection(db, "books");
+  //   const booksCollectionRef = collection(db, "books");
   //getDocs
-  const getBookList = async () => {
+  //   const getBookList = async (userId) => {
+  //     try {
+  //       const data = await getDocs(booksCollectionRef);
+  //       const allbooks = data.docs.map((doc) => ({
+  //         ...doc.data(),
+  //         id: doc.id,
+  //       }));
+  //       setBookList(allbooks);
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   };
+
+  //   useEffect(() => {
+  //     getBookList(); //call the function
+  //   }, []);
+
+  // Fetch user's books
+  const fetchBooks = async (userId) => {
     try {
-      const data = await getDocs(booksCollectionRef);
-      const allbooks = data.docs.map((doc) => ({
-        ...doc.data(),
+      const userBooksCollectionRef = collection(
+        db,
+        `users/${userId}/booksCollection`
+      );
+      const querySnapshot = await getDocs(userBooksCollectionRef);
+      const booksData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
+        ...doc.data(),
+        // const q = query(booksCollectionRef, where("userId", "==", userId));
+        // const querySnapshot = await getDocs(q);
+        // const booksData = querySnapshot.docs.map((doc) => ({
+        //   id: doc.id,
+        //   ...doc.data(),
       }));
-      setBookList(allbooks);
-    } catch (err) {
-      console.error(err);
+      setBookList(booksData);
+    } catch (error) {
+      console.error("Error fetching books: ", error);
     }
   };
 
   useEffect(() => {
-    getBookList(); //call the function
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+        setUserName(user.displayName.split(" ")[0]);
+        fetchBooks(user.uid);
+      } else {
+        setIsAuthenticated(false);
+      }
+    });
+    return () => unsubscribe();
   }, []);
 
   const handleEdit = (id) => {
@@ -73,6 +119,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
       {!isAdding && !isEditing && (
         <div>
           <Header
+            userName={userName}
             setIsAdding={setIsAdding}
             setIsAuthenticated={setIsAuthenticated}
           />
@@ -88,7 +135,8 @@ const Dashboard = ({ setIsAuthenticated }) => {
           setIsAdding={setIsAdding}
           bookList={bookList}
           setBookList={setBookList}
-          getBookList={getBookList}
+          fetchBooks={fetchBooks}
+          //  getBookList={getBookList}
           rating={rating}
           setRating={setRating}
         />
@@ -96,7 +144,8 @@ const Dashboard = ({ setIsAuthenticated }) => {
       {isEditing && (
         <Edit
           bookList={bookList}
-          getBookList={getBookList}
+          fetchBooks={fetchBooks}
+          //  getBookList={getBookList}
           selectedBook={selectedBook}
           setBookList={setBookList}
           setIsEditing={setIsEditing}
