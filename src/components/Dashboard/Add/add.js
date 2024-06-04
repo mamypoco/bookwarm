@@ -10,7 +10,6 @@ const Add = ({
   setBookList,
   setIsAdding,
   fetchBooks,
-  //   getBookList,
   rating,
   setRating,
 }) => {

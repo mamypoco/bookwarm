@@ -12,8 +12,8 @@ const Edit = ({
   setBookList,
   setIsEditing,
   fetchBooks,
-  rating,
-  setRating,
+  //   rating,
+  //   setRating,
 }) => {
   const id = selectedBook.id;
 
@@ -25,7 +25,7 @@ const Edit = ({
   const [pages, setPages] = useState(selectedBook.pages);
   const [format, setFormat] = useState(selectedBook.format);
   const [status, setStatus] = useState(selectedBook.status);
-  //   const [rating, setRating] = useState(selectedBook.rating);
+  const [rating, setRating] = useState(selectedBook.rating);
   const [sentiment, setSentiment] = useState(selectedBook.sentiment);
 
   const handleUpdate = async (e) => {
@@ -141,8 +141,8 @@ const Edit = ({
           <Rating
             rating={rating}
             setRating={setRating}
-            currentRating={rating}
-            handleOnChange={(e) => setRating(Number(e.target.value))}
+            // currentRating={rating}
+            // handleOnChange={(e) => setRating(Number(e.target.value))}
           />
         </div>
         <div className="add-cancel-buttons">

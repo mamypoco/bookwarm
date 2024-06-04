@@ -12,9 +12,9 @@ const List = ({ bookList, handleDelete, handleEdit }) => {
             <div className="title-author">
               {book.title} by {book.author}
             </div>
-            <div>{book.rating}</div>
+            {/* <div>{book.rating}</div> */}
             {/* rating component here */}
-            <Rating rating={book.rating} />
+            <Rating rating={book.rating} readOnly={true} />
 
             <div className="grid-container">
               <div className="comment-container">

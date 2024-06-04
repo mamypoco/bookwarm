@@ -68,20 +68,31 @@ const Dashboard = ({ setIsAuthenticated }) => {
       showCancelButton: true,
       confirmButtonText: "Yes, delete it",
       cancelButtonText: "No, cancel",
-    }).then((result) => {
-      if (result.value) {
-        const [book] = bookList.filter((book) => book.id === id);
-        deleteDoc(doc(db, "books", id));
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const [book] = bookList.filter((book) => book.id === id);
+          deleteDoc(doc(db, `users/${user.uid}/booksCollection`, id));
 
-        Swal.fire({
-          icon: "Success",
-          title: "Deleted!",
-          text: `${book.title} by ${book.author} is deleted.`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        const bookCopy = bookList.filter((book) => book.id !== id);
-        setBookList(bookCopy);
+          Swal.fire({
+            icon: "Success",
+            title: "Deleted!",
+            text: `${book.title} by ${book.author} is deleted.`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+
+          const bookCopy = bookList.filter((book) => book.id !== id);
+          setBookList(bookCopy);
+        } catch (error) {
+          console.error("Error deleting book: ", error);
+          Swal.fire({
+            icon: "error",
+            title: "error",
+            text: "There was a problem deleting the book.",
+            showConfirmButton: true,
+          });
+        }
       }
     });
   };
@@ -108,7 +119,6 @@ const Dashboard = ({ setIsAuthenticated }) => {
           bookList={bookList}
           setBookList={setBookList}
           fetchBooks={fetchBooks}
-          //  getBookList={getBookList}
           rating={rating}
           setRating={setRating}
         />
@@ -118,7 +128,6 @@ const Dashboard = ({ setIsAuthenticated }) => {
           userId={user?.uid}
           bookList={bookList}
           fetchBooks={fetchBooks}
-          //  getBookList={getBookList}
           selectedBook={selectedBook}
           setBookList={setBookList}
           setIsEditing={setIsEditing}
