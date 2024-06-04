@@ -1,13 +1,6 @@
 import "./index.scss";
 import { useState, useEffect } from "react";
-import {
-  getDocs,
-  collection,
-  deleteDoc,
-  doc,
-  query,
-  where,
-} from "firebase/firestore";
+import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { auth } from "../../config/firebase";
 
@@ -25,25 +18,6 @@ const Dashboard = ({ setIsAuthenticated }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [rating, setRating] = useState(null); //moved the state up from add, edit and list
-
-  //   const booksCollectionRef = collection(db, "books");
-  //getDocs
-  //   const getBookList = async (userId) => {
-  //     try {
-  //       const data = await getDocs(booksCollectionRef);
-  //       const allbooks = data.docs.map((doc) => ({
-  //         ...doc.data(),
-  //         id: doc.id,
-  //       }));
-  //       setBookList(allbooks);
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     getBookList(); //call the function
-  //   }, []);
 
   // Fetch user's books
   const fetchBooks = async (userId) => {
@@ -82,7 +56,6 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   const handleEdit = (id) => {
     const [book] = bookList.filter((book) => book.id === id);
-
     setSelectedBook(book);
     setIsEditing(true);
   };
@@ -142,6 +115,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
       )}
       {isEditing && (
         <Edit
+          userId={user?.uid}
           bookList={bookList}
           fetchBooks={fetchBooks}
           //  getBookList={getBookList}

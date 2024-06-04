@@ -6,12 +6,12 @@ import Swal from "sweetalert2";
 import Rating from "../../Rating/rating";
 
 const Edit = ({
+  userId,
   bookList,
   selectedBook,
   setBookList,
   setIsEditing,
   fetchBooks,
-  //   getBookList,
   rating,
   setRating,
 }) => {
@@ -31,7 +31,7 @@ const Edit = ({
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    const book = {
+    const updatedBook = {
       id,
       date,
       title,
@@ -45,19 +45,21 @@ const Edit = ({
       sentiment,
     };
 
-    await setDoc(doc(db, "books", id), {
-      ...book,
+    await setDoc(doc(db, `users/${userId}/booksCollection`, id), {
+      ...updatedBook,
     });
 
-    setBookList(bookList);
+    setBookList((prevBookList) =>
+      prevBookList.map((book) => (book.id === id ? updatedBook : book))
+    );
+
     setIsEditing(false);
-    fetchBooks();
-    //  getBookList();
+    fetchBooks(userId);
 
     Swal.fire({
       icon: "success",
       title: "Updated!",
-      text: `${book.title} by ${book.author} has been updated.`,
+      text: `${updatedBook.title} by ${updatedBook.author} has been updated.`,
       showConfirmButton: false,
       timer: 1500,
     });
