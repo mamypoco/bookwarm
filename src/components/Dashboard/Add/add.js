@@ -4,6 +4,7 @@ import { db, auth } from "../../../config/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import Swal from "sweetalert2";
 import Rating from "../../Rating/rating";
+import Modal from "../../Modal/Modal";
 
 const Add = ({
   bookList,
@@ -76,85 +77,88 @@ const Add = ({
   };
 
   return (
-    <div className="add-container">
-      <h2>Let's add a book</h2>
-      <div className="add-form-wrapprer">
-        <form className="add-form" onSubmit={handleAdd}>
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-          <input
-            placeholder="Title"
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <input
-            placeholder="Author"
-            onChange={(e) => setAuthor(e.target.value)}
-            type="text"
-            value={author}
-          />
-          <select
-            placeholder="Select Genre"
-            onChange={(e) => setGenre(e.target.value)}
-            id="genre"
-          >
-            <option value="">Select Genre...</option>
-            <option value="novel">Novel</option>
-            <option value="non-fiction">Non-fiction</option>
-            <option value="mystery">Mystery</option>
-            <option value="science-fiction">Science Fiction</option>
-            <option value="fantasy">Fantasy</option>
-            <option value="know-how">Know-how</option>
-            <option value="manga">Manga</option>
-            <option value="Others">Others</option>
-          </select>
-          <input
-            placeholder="EN or JP"
-            onChange={(e) => setLang(e.target.value)}
-            type="text"
-            value={lang}
-          />
-          <input
-            placeholder="Pages"
-            onChange={(e) => setPages(e.target.value)}
-            type="text"
-            value={pages}
-          />
+    <Modal
+      title="Add a new book"
+      onClose={() => setIsAdding(false)}
+      onSubmit={handleAdd}
+      submitText="Add"
+    >
+      <form className="add-form" onSubmit={handleAdd}>
+        <input
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
+        <input
+          placeholder="Title"
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <input
+          placeholder="Author"
+          onChange={(e) => setAuthor(e.target.value)}
+          type="text"
+          value={author}
+        />
+        <select
+          placeholder="Select Genre"
+          onChange={(e) => setGenre(e.target.value)}
+          id="genre"
+        >
+          <option value="">Select Genre...</option>
+          <option value="novel">Novel</option>
+          <option value="non-fiction">Non-fiction</option>
+          <option value="mystery">Mystery</option>
+          <option value="science-fiction">Science Fiction</option>
+          <option value="fantasy">Fantasy</option>
+          <option value="know-how">Know-how</option>
+          <option value="manga">Manga</option>
+          <option value="Others">Others</option>
+        </select>
+        <input
+          placeholder="EN or JP"
+          onChange={(e) => setLang(e.target.value)}
+          type="text"
+          value={lang}
+        />
+        <input
+          placeholder="Pages"
+          onChange={(e) => setPages(e.target.value)}
+          type="text"
+          value={pages}
+        />
 
-          <input
-            placeholder="Format: book, ebook, or audiobook"
-            onChange={(e) => setFormat(e.target.value)}
-            type="text"
-            value={format}
-          />
-          <input
-            placeholder="Status: read or reading"
-            onChange={(e) => setStatus(e.target.value)}
-            type="text"
-            value={status}
-          />
+        <input
+          placeholder="Format: book, ebook, or audiobook"
+          onChange={(e) => setFormat(e.target.value)}
+          type="text"
+          value={format}
+        />
+        <input
+          placeholder="Status: read or reading"
+          onChange={(e) => setStatus(e.target.value)}
+          type="text"
+          value={status}
+        />
 
-          <textarea
-            placeholder="Your sentiment"
-            onChange={(e) => setSentiment(e.target.value)}
-            type="text"
-            rows={7}
-            value={sentiment}
+        <textarea
+          placeholder="Your sentiment"
+          onChange={(e) => setSentiment(e.target.value)}
+          type="text"
+          rows={7}
+          value={sentiment}
+        />
+        <div className="rating-container">
+          <p>Your rating:</p>
+          <Rating
+            rating={rating}
+            setRating={setRating}
+            currentRating={rating}
+            handleOnChange={(e) => setRating(Number(e.target.value))}
           />
-          <div className="rating-container">
-            <p>Your rating:</p>
-            <Rating
-              rating={rating}
-              setRating={setRating}
-              currentRating={rating}
-              handleOnChange={(e) => setRating(Number(e.target.value))}
-            />
-          </div>
-          <div className="add-cancel-buttons">
+        </div>
+        {/* <div className="add-cancel-buttons">
             <input
               className="submit-add-button"
               type="submit"
@@ -168,10 +172,10 @@ const Add = ({
               name="Cancel"
               onClick={() => setIsAdding(false)}
             />
-          </div>
-        </form>
-      </div>
-    </div>
+          </div> */}
+      </form>
+      {/* </div> */}
+    </Modal>
   );
 };
 
