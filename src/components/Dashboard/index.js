@@ -17,7 +17,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
   const [selectedBook, setSelectedBook] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [rating, setRating] = useState(null); //moved the state up from add, edit and list
+  const [rating, setRating] = useState(null);
 
   // Fetch user's books
   const fetchBooks = async (userId) => {
