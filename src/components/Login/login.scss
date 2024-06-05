@@ -1,9 +1,35 @@
+// body {
+//   background-image: url(../../assets/images/hero.jpg);
+//   background-repeat: no-repeat;
+//   background-size: cover;
+// }
+
+.hero-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-image {
+  opacity: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+}
+
 .login-container {
+  position: relative;
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  margin: 7rem auto;
+  margin: 10rem auto;
   align-items: center;
   width: 20rem;
+  background: rgba(247, 245, 245, 0.3);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  padding-block: 1rem;
 }
 
 .login-form input,

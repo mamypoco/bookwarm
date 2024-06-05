@@ -2,17 +2,19 @@
   position: fixed;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
+  //   background-color: white;
   //   background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: start;
   backdrop-filter: blur(5px);
+  z-index: 100;
 }
 
 .modalContainer {
   max-width: 500px;
-  background-color: rgb(226, 172, 147);
+  background-color: #e0d0b8;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 10px 20px rgb(0, 0, 0, 0.4);
@@ -20,7 +22,20 @@
   display: inline-block;
   text-align: center;
   margin-top: 5rem;
-  //   z-index: 10;
+  z-index: 101;
+  animation: slide-down 0.3s ease-out;
+}
+
+/* Slide-down Animation */
+@keyframes slide-down {
+  from {
+    transform: translateY(-5%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .closeButton {

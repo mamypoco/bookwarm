@@ -10,6 +10,7 @@ import { setDoc, doc } from "firebase/firestore";
 
 import "./login.scss";
 import Swal from "sweetalert2";
+import heroImage from "../../../src/assets/images/hero.jpg";
 
 const Login = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState("");
@@ -137,46 +138,49 @@ const Login = ({ setIsAuthenticated }) => {
   };
 
   return (
-    <div className="login-container">
-      <h1>BookWarm</h1>
+    <div className="hero-container">
+      <img className="hero-image" src={heroImage} alt="hero" />
+      <div className="login-container">
+        {/* <h1>BookWarm</h1> */}
 
-      <form className="login-form" onSubmit={handleSubmit}>
-        <button className="google-signin-button" onClick={loginWithGoogle}>
-          Login With Google
-        </button>
-        <div className="row-div">
-          <input
-            placeholder="Email"
-            autoComplete="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="row-div">
-          <input
-            placeholder="password"
-            autoComplete="password"
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-          />
-        </div>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <button className="google-signin-button" onClick={loginWithGoogle}>
+            Login With Google
+          </button>
+          <div className="row-div">
+            <input
+              placeholder="Email"
+              autoComplete="email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="row-div">
+            <input
+              placeholder="password"
+              autoComplete="password"
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+            />
+          </div>
 
-        <div className="row-div">
-          <input
-            className="register-submit-button"
-            type="submit"
-            value="Register"
-            name="Register"
-          />
-        </div>
-        <div className="row-div">
-          <input
-            type="submit"
-            className="login-submit-button"
-            value="Login"
-            name="Login"
-          />
-        </div>
-      </form>
+          <div className="row-div">
+            <input
+              className="register-submit-button"
+              type="submit"
+              value="Register"
+              name="Register"
+            />
+          </div>
+          <div className="row-div">
+            <input
+              type="submit"
+              className="login-submit-button"
+              value="Login"
+              name="Login"
+            />
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

@@ -2,30 +2,40 @@
   text-align: center;
 }
 
-.comment-container {
-  display: flex;
-  gap: 0.8rem;
-}
-
-.comment-icon {
-  margin-top: 0.7rem;
-  width: 2rem;
-  height: 2rem;
-}
-
 .book-card {
   text-align: left;
-  margin: 1rem auto;
-  width: 60%;
+  margin: 1.5rem auto;
+  max-width: 50rem;
   padding: 0.5rem 1rem;
-  border: 1px solid gray;
+  //   border: 1px solid gray;
   border-radius: 8px;
-  background-color: rgb(145, 140, 140);
+  //   background-color: rgb(173, 172, 172);
+  background-color: #b9b4c7;
+  box-shadow: 0px 10px 20px rgb(0, 0, 0, 0.4);
 }
 
 .title-author {
   font-size: 1.2rem;
   font-weight: 600;
+}
+
+.comment-container {
+  display: flex;
+  //   gap: 0.2rem;
+}
+
+.comment-icon {
+  margin-top: 0.3rem;
+  width: 2rem;
+  height: 2rem;
+}
+
+.comment-info {
+  margin: 0.5rem;
+}
+
+.content-info {
+  margin: 0.5rem;
 }
 
 .list-action-buttons {

@@ -19,10 +19,10 @@ const List = ({ bookList, handleDelete, handleEdit }) => {
             <div className="grid-container">
               <div className="comment-container">
                 <img className="comment-icon" src={commentIcon} alt="comment" />
-                <p>{book.sentiment}</p>
+                <p className="comment-info">{book.sentiment}</p>
               </div>
-              <div className="right-content">
-                <p>
+              <div>
+                <p className="content-info">
                   {book.status} {book.pages} pages {book.lang} {book.format} (
                   {book.genre}) on {book.date}
                 </p>
