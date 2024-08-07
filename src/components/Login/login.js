@@ -10,7 +10,7 @@ import { setDoc, doc } from "firebase/firestore";
 
 import "./login.scss";
 import Swal from "sweetalert2";
-import heroImage from "../../../src/assets/images/hero.jpg";
+// import heroImage from "../../../src/assets/images/hero.jpg";
 
 const Login = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState("");
@@ -139,10 +139,10 @@ const Login = ({ setIsAuthenticated }) => {
 
   return (
     <div className="hero-container">
-      <img className="hero-image" src={heroImage} alt="hero" />
-      <div className="login-container">
-        {/* <h1>BookWarm</h1> */}
+      {/* <img className="hero-image" src={heroImage} alt="hero" /> */}
 
+      <div className="login-container">
+        <h1>Bookwarm</h1>
         <form className="login-form" onSubmit={handleSubmit}>
           <button className="google-signin-button" onClick={loginWithGoogle}>
             Login With Google

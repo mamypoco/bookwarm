@@ -1,7 +1,13 @@
 .dashboard-container {
-  margin: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: url("../../../src/assets/images/dashboard.jpg");
+  min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-
-// button:hover {
-//   cursor: pointer;
-// }

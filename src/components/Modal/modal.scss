@@ -2,7 +2,7 @@
   position: fixed;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.5);
   //   background-color: white;
   //   background-color: transparent;
   display: flex;
@@ -14,7 +14,8 @@
 
 .modalContainer {
   max-width: 500px;
-  background-color: #e0d0b8;
+  //   background-color: #e0d0b8;
+  background-color: #debfa5;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 10px 20px rgb(0, 0, 0, 0.4);
