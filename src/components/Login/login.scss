@@ -1,15 +1,13 @@
 .hero-container {
-  //   display: flex;
-  //   align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   background: url("../../../src/assets/images/hero.jpg");
-  min-height: 100%;
+  min-height: 100vh;
   min-width: 1024px;
   width: 100%;
   height: auto;
-  background-position: center;
+  background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -51,20 +49,30 @@ button {
 }
 
 .login-form input:hover {
-  border: 1px solid black;
+  //   border: 1px solid white;
+  cursor: pointer;
 }
-
-.login-submit-button {
-  background: black;
-  color: white;
-}
-
-.register-submit-button {
-  background: rgb(153, 157, 163);
-  //   color: white;
-}
-
 .google-signin-button {
   background: orange;
   width: 15rem;
+  &:hover {
+    background: darkorange;
+    cursor: pointer;
+  }
+}
+
+.register-submit-button {
+  background: rgb(159, 160, 161);
+  &:hover {
+    background-color: rgb(90, 136, 192);
+    color: white;
+  }
+}
+
+.login-submit-button {
+  background: rgb(68, 67, 67);
+  color: white;
+  &:hover {
+    background: black;
+  }
 }

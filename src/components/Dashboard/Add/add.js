@@ -83,7 +83,7 @@ const Add = ({
       onSubmit={handleAdd}
       submitText="Add"
     >
-      <form className="add-form" onSubmit={handleAdd}>
+      <form className="add-form">
         <input
           type="date"
           value={date}
@@ -105,6 +105,7 @@ const Add = ({
           placeholder="Select Genre"
           onChange={(e) => setGenre(e.target.value)}
           id="genre"
+          value={genre}
         >
           <option value="">Select Genre...</option>
           <option value="novel">Novel</option>

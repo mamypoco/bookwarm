@@ -1,12 +1,13 @@
 import React from "react";
 import "./modal.scss";
+import closeButton from "../../assets/icons/cross.png";
 
 function Modal({ title, children, onClose, onSubmit, submitText }) {
   return (
     <div className="modalBackground">
       <div className="modalContainer">
         <button className="closeButton" onClick={onClose}>
-          X
+          <img src={closeButton} alt="close button" />
         </button>
         <div className="title">
           <h2>{title}</h2>

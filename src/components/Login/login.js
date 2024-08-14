@@ -142,7 +142,7 @@ const Login = ({ setIsAuthenticated }) => {
       {/* <img className="hero-image" src={heroImage} alt="hero" /> */}
 
       <div className="login-container">
-        <h1>Bookwarm</h1>
+        <h1>Bookwarm.</h1>
         <form className="login-form" onSubmit={handleSubmit}>
           <button className="google-signin-button" onClick={loginWithGoogle}>
             Login With Google

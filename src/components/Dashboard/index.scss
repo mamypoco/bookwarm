@@ -3,11 +3,25 @@
   top: 0;
   left: 0;
   background: url("../../../src/assets/images/dashboard.jpg");
-  min-height: 100%;
+  min-height: 100vh;
   min-width: 1024px;
   width: 100%;
   height: auto;
-  background-position: center;
+  background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+@media screen and (max-width: 1024px) {
+  .dashboard-container {
+    left: 50%;
+    margin-left: -512px; /* 50% */
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .dashboard-container {
+    left: 50%;
+    margin-left: -512px; /* 50% */
+  }
 }
