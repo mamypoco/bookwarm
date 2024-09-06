@@ -1,32 +1,56 @@
 .modalBackground {
   position: fixed;
-  width: 100vw;
-  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  //   width: 100vw;
+  //   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
-  //   background-color: white;
-  //   background-color: transparent;
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   backdrop-filter: blur(5px);
+  overflow-y: auto;
+  //   padding-top: 1rem;
   z-index: 100;
 }
 
 .modalContainer {
   max-width: 31rem;
-  //   background-color: #e0d0b8;
   background-color: #debfa5;
-  padding: 1.5rem;
+  padding: 0.5rem;
   border-radius: 10px;
   box-shadow: 0px 10px 20px rgb(0, 0, 0, 0.4);
   position: relative;
   display: inline-block;
   text-align: center;
-  margin-top: 5rem;
+  margin-top: 4rem;
   z-index: 101;
   animation: slide-down 0.5s ease-out;
+  max-height: 90vh;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
+@media screen and (max-width: 1024px) {
+  /* Adjust for smaller screens like laptops */
+  .modalContainer {
+    margin-top: 0; /* Reduce the top margin */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* Adjust for even smaller screens */
+  .modalContainer {
+    margin-top: 0; /* Further reduce the top margin */
+  }
+}
+
+.modalContainer::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Webkit browsers */
+}
 /* Slide-down Animation */
 @keyframes slide-down {
   from {
@@ -40,14 +64,29 @@
 }
 
 .closeButton {
+  background-color: transparent;
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
+  top: 10px;
+  right: 10px;
   border: none;
   cursor: pointer;
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.closeButton:hover {
+  background-color: rgb(194, 173, 173);
+}
+
+.closeButtonImage {
+  width: 70%;
+  border-radius: 50%;
+  height: auto;
 }
 
 .title {
@@ -55,13 +94,14 @@
 }
 
 .body {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .footer {
   display: flex;
   justify-content: space-between;
-  padding-inline: 4rem;
+  padding-inline: 5rem;
+  padding-bottom: 1rem;
 }
 
 .submitButton .cancelButton {

@@ -7,7 +7,12 @@ function Modal({ title, children, onClose, onSubmit, submitText }) {
     <div className="modalBackground">
       <div className="modalContainer">
         <button className="closeButton" onClick={onClose}>
-          <img src={closeButton} alt="close button" />
+          <img
+            type="button"
+            src={closeButton}
+            alt="close button"
+            className="closeButtonImage"
+          />
         </button>
         <div className="title">
           <h2>{title}</h2>

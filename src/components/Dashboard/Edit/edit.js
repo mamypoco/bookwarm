@@ -136,7 +136,7 @@ const Edit = ({
           placeholder="Your sentiment"
           onChange={(e) => setSentiment(e.target.value)}
           type="text"
-          rows={5}
+          rows={6}
           value={sentiment}
         />
         <div className="rating-container">
