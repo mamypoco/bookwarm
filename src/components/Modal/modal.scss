@@ -13,10 +13,10 @@
 }
 
 .modalContainer {
-  max-width: 500px;
+  max-width: 31rem;
   //   background-color: #e0d0b8;
   background-color: #debfa5;
-  padding: 20px;
+  padding: 1.5rem;
   border-radius: 10px;
   box-shadow: 0px 10px 20px rgb(0, 0, 0, 0.4);
   position: relative;
@@ -24,7 +24,7 @@
   text-align: center;
   margin-top: 5rem;
   z-index: 101;
-  animation: slide-down 0.3s ease-out;
+  animation: slide-down 0.5s ease-out;
 }
 
 /* Slide-down Animation */
@@ -41,7 +41,7 @@
 
 .closeButton {
   position: absolute;
-  top: 10px;
+  top: 1rem;
   right: 1rem;
   background: none;
   border: none;
@@ -51,11 +51,11 @@
 }
 
 .title {
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 .body {
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
 }
 
 .footer {

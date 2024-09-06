@@ -2,6 +2,8 @@
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   background: url("../../../src/assets/images/dashboard.jpg");
   min-height: 100vh;
   min-width: 1024px;
@@ -10,6 +12,30 @@
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.header-section {
+  height: 60px;
+  padding: 10px;
+  z-index: 10;
+  position: relative;
+}
+
+.list-section {
+  position: absolute;
+  top: 120px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  padding: 20px;
+  z-index: 0;
+  -webkit-overflow-scrolling: touch; /* Enables smooth scrolling on iOS */
+  scrollbar-width: none;
+}
+
+.list-section::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Webkit browsers */
 }
 
 @media screen and (max-width: 1024px) {

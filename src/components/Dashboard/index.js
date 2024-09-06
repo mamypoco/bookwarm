@@ -101,16 +101,20 @@ const Dashboard = ({ setIsAuthenticated }) => {
     <div className="dashboard-container">
       {!isAdding && !isEditing && (
         <div>
-          <Header
-            userName={userName}
-            setIsAdding={setIsAdding}
-            setIsAuthenticated={setIsAuthenticated}
-          />
-          <List
-            bookList={bookList}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-          />
+          <div className="header-section">
+            <Header
+              userName={userName}
+              setIsAdding={setIsAdding}
+              setIsAuthenticated={setIsAuthenticated}
+            />
+          </div>
+          <div className="list-section">
+            <List
+              bookList={bookList}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+            />
+          </div>
         </div>
       )}
       {isAdding && (

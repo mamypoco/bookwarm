@@ -147,7 +147,7 @@ const Add = ({
           placeholder="Your sentiment"
           onChange={(e) => setSentiment(e.target.value)}
           type="text"
-          rows={7}
+          rows={5}
           value={sentiment}
         />
         <div className="rating-container">
@@ -159,23 +159,7 @@ const Add = ({
             handleOnChange={(e) => setRating(Number(e.target.value))}
           />
         </div>
-        {/* <div className="add-cancel-buttons">
-            <input
-              className="submit-add-button"
-              type="submit"
-              value="Add"
-              name="Submit"
-            />
-            <input
-              className="submit-add-cancel-button"
-              type="button"
-              value="Cancel"
-              name="Cancel"
-              onClick={() => setIsAdding(false)}
-            />
-          </div> */}
       </form>
-      {/* </div> */}
     </Modal>
   );
 };

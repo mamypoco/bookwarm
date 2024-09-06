@@ -34,26 +34,3 @@ textarea {
     color: #5a5858;
   }
 }
-
-.add-cancel-buttons {
-  display: flex;
-  gap: 0.5rem;
-  width: 80%;
-}
-.add-button {
-  padding: 0.5rem;
-  border-radius: 4px;
-  border: none;
-  color: white;
-  background: black;
-  margin: 1rem 0;
-}
-
-.cancel-button {
-  padding: 0.5rem;
-  border-radius: 4px;
-  border: none;
-  color: black;
-  background: white;
-  margin: 1rem 0;
-}

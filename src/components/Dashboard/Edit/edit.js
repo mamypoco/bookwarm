@@ -136,7 +136,7 @@ const Edit = ({
           placeholder="Your sentiment"
           onChange={(e) => setSentiment(e.target.value)}
           type="text"
-          rows={7}
+          rows={5}
           value={sentiment}
         />
         <div className="rating-container">
@@ -148,21 +148,6 @@ const Edit = ({
             // handleOnChange={(e) => setRating(Number(e.target.value))}
           />
         </div>
-        {/* <div className="add-cancel-buttons">
-          <input
-            className="add-button"
-            type="submit"
-            value="Update"
-            name="Submit"
-          />
-          <input
-            className="cancel-button"
-            type="button"
-            value="Cancel"
-            name="Cancel"
-            onClick={() => setIsEditing(false)}
-          />
-        </div> */}
       </form>
     </Modal>
   );
