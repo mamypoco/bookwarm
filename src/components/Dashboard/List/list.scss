@@ -1,8 +1,30 @@
 .list-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-gap: 1.5rem;
-  margin-inline: 20%;
+  margin-inline: 35%;
+  //mobile default for convenience in setting other views
+
+  //ipad mini
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    margin-inline: 12%;
+  }
+  //ipad air
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-inline: 5%;
+  }
+  //laptop
+  @media (min-width: 1440px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-inline: 10%;
+  }
+  //desktop
+  @media (min-width: 1700px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    margin-inline: 15%;
+  }
 }
 
 .book-card {
@@ -11,17 +33,20 @@
   justify-content: space-between;
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  background-color: rgba(160, 229, 229, 0.7);
+  background-color: rgba(246, 248, 248, 0.7);
   box-shadow: 0px 10px 20px rgba(139, 126, 126, 0.5);
 }
 
 .title-author {
   font-size: 1.2rem;
   font-weight: 600;
+
+  .regular-style {
+    font-weight: 400;
+  }
 }
 
 .rating-info-container {
-  //   display: flex;
   align-items: center;
 }
 
@@ -46,7 +71,6 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  //   max-height: 3em;
   line-height: 1.5em;
   /* Future compatibility */
   line-clamp: 2; /* This will have no effect currently but is added for future-proofing */

@@ -39,15 +39,17 @@ const List = ({ bookList, handleDelete, handleEdit }) => {
             onClick={() => openCardModal(book)}
           >
             <div className="title-author">
-              {book.title} by {book.author}
+              {book.title} <span className="regular-style">by</span>{' '}
+              {book.author}
             </div>
 
             <div className="rating-info-container">
               <Rating rating={book.rating} readOnly={true} />
               <p className="content-info">
-                {book.status === 'reading' ? 'Currently reading ' : 'Read '}
-                {book.pages} page {book.lang} {book.format} ({book.genre}) as of{' '}
-                {book.date}
+                {book.pages} page | {book.lang} | {book.format} | {book.genre}
+                <br />
+                {book.status === 'reading' ? 'Currently reading ' : 'Read '} as
+                of {book.date}
               </p>
             </div>
 

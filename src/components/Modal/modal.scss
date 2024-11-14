@@ -18,14 +18,14 @@
 
 .modalContainer {
   max-width: 31rem;
-  background-color: #debfa5;
+  //   background-color: #debfa5;
   padding: 0.5rem;
   border-radius: 10px;
   box-shadow: 0px 10px 20px rgb(0, 0, 0, 0.4);
   position: relative;
   display: inline-block;
   text-align: center;
-  margin-top: 4rem;
+  //   margin-top: 2rem;
   z-index: 101;
   animation: slide-down 0.5s ease-out;
   max-height: 90vh;
@@ -34,17 +34,10 @@
   scrollbar-width: none;
 }
 
-@media screen and (max-width: 1024px) {
-  /* Adjust for smaller screens like laptops */
+@media screen and (min-width: 1700px) {
+  //desktops screen has more top space
   .modalContainer {
-    margin-top: 0; /* Reduce the top margin */
-  }
-}
-
-@media screen and (max-width: 768px) {
-  /* Adjust for even smaller screens */
-  .modalContainer {
-    margin-top: 0; /* Further reduce the top margin */
+    margin-top: 5rem;
   }
 }
 
