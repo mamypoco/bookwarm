@@ -3,27 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import Loading from '../../Loading/loading';
 import commentIcon from '../../../assets/images/quote.png';
 import Rating from '../../Rating/rating';
-
-const BookModal = ({ book, onClose }) => {
-  if (!book) return null;
-
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <h2>
-          {book.title} by {book.author}
-        </h2>
-        <Rating rating={book.rating} readOnly={true} />
-        <p>
-          {book.pages} pages | {book.lang} | {book.format}
-        </p>
-        <p>Genre: {book.genre}</p>
-        <p>Sentiment: {book.sentiment}</p>
-        <button onClick={onClose}>Close</button>
-      </div>
-    </div>
-  );
-};
+import BookModal from '../../BookModal/bookmodal';
 
 const List = ({ bookList, handleDelete, handleEdit }) => {
   const [isOverflowing, setIsOverflowing] = useState(false); //to check if the height is overflowing
@@ -42,8 +22,6 @@ const List = ({ bookList, handleDelete, handleEdit }) => {
   const openCardModal = (book) => {
     setIsCardModalActive(true);
     setSelectedBook(book);
-    console.log('Book clicked:', book); // Debug log
-    console.log('Modal active:', isCardModalActive);
   };
 
   const closeCardModal = () => {
