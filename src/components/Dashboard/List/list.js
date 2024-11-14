@@ -1,12 +1,34 @@
-import "./list.scss";
-import { useState, useRef, useEffect } from "react";
-import Loading from "../../Loading/loading";
-import commentIcon from "../../../assets/icons/insta-comment.svg";
-import Rating from "../../Rating/rating";
+import './list.scss';
+import { useState, useRef, useEffect } from 'react';
+import Loading from '../../Loading/loading';
+import commentIcon from '../../../assets/images/quote.png';
+import Rating from '../../Rating/rating';
+
+const BookModal = ({ book, onClose }) => {
+  if (!book) return null;
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <h2>
+          {book.title} by {book.author}
+        </h2>
+        <Rating rating={book.rating} readOnly={true} />
+        <p>
+          {book.pages} pages | {book.lang} | {book.format}
+        </p>
+        <p>Genre: {book.genre}</p>
+        <p>Sentiment: {book.sentiment}</p>
+        <button onClick={onClose}>Close</button>
+      </div>
+    </div>
+  );
+};
 
 const List = ({ bookList, handleDelete, handleEdit }) => {
-  const [isExpanded, setIsExpanded] = useState(false); //to expand the comment line
   const [isOverflowing, setIsOverflowing] = useState(false); //to check if the height is overflowing
+  const [isCardModalActive, setIsCardModalActive] = useState(false);
+  const [selectedBook, setSelectedBook] = useState(null); // state for selected book
   const commentRef = useRef(null);
 
   //checks if the total height of the content (scrollHeight) is greater than the visible height (clientHeight). If so, set the content is overflowing (not all is visible).
@@ -17,18 +39,27 @@ const List = ({ bookList, handleDelete, handleEdit }) => {
     }
   }, []);
 
-  //function to expand the comment.
-  const toggleExpansion = () => {
-    if (isOverflowing) {
-      setIsExpanded(!isExpanded);
-    }
+  const openCardModal = (book) => {
+    setIsCardModalActive(true);
+    setSelectedBook(book);
+    console.log('Book clicked:', book); // Debug log
+    console.log('Modal active:', isCardModalActive);
+  };
+
+  const closeCardModal = () => {
+    setIsCardModalActive(false);
+    setSelectedBook(null);
   };
 
   return (
     <div className="list-container">
-      {bookList ? (
-        bookList.map((book, key) => (
-          <div key={book.id} className="book-card">
+      {bookList && bookList.length > 0 ? (
+        bookList.map((book) => (
+          <div
+            key={book.id}
+            className="book-card"
+            onClick={() => openCardModal(book)}
+          >
             <div className="title-author">
               {book.title} by {book.author}
             </div>
@@ -36,41 +67,33 @@ const List = ({ bookList, handleDelete, handleEdit }) => {
             <div className="rating-info-container">
               <Rating rating={book.rating} readOnly={true} />
               <p className="content-info">
-                {book.status === "reading" ? "I'm " : "I have "}
-                {book.status} {book.pages} page {book.lang} {book.format} (
-                {book.genre}) as of {book.date}
+                {book.status === 'reading' ? 'Currently reading ' : 'Read '}
+                {book.pages} page {book.lang} {book.format} ({book.genre}) as of{' '}
+                {book.date}
               </p>
             </div>
 
             <div className="comment-container">
               <img className="comment-icon" src={commentIcon} alt="comment" />
-              <div
-                onClick={toggleExpansion}
-                style={{ cursor: isOverflowing ? "pointer" : "default" }}
-              >
-                <p
-                  ref={commentRef}
-                  className={isExpanded ? "" : "comment-info"}
-                  style={{ marginBottom: "0" }}
-                >
-                  {book.sentiment}
-                </p>
-                {/* {isOverflowing && !isExpanded && (
-                  <span>....</span> // Optional: Only show ellipsis separately if needed
-                )} */}
-              </div>
+              <p className="comment-info">{book.sentiment}</p>
             </div>
 
             <div className="list-action-buttons">
               <button
                 className="edit-button"
-                onClick={() => handleEdit(book.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleEdit(book.id);
+                }}
               >
                 Edit
               </button>
               <button
                 className="delete-button"
-                onClick={() => handleDelete(book.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDelete(book.id);
+                }}
               >
                 Delete
               </button>
@@ -78,9 +101,11 @@ const List = ({ bookList, handleDelete, handleEdit }) => {
           </div>
         ))
       ) : (
-        <div>
-          <Loading />
-        </div>
+        <Loading />
+      )}
+
+      {isCardModalActive && selectedBook && (
+        <BookModal book={selectedBook} onClose={closeCardModal} />
       )}
     </div>
   );

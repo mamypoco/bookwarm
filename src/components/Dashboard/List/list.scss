@@ -1,17 +1,20 @@
 .list-container {
-  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1.5rem;
+  margin-inline: 20%;
 }
 
 .book-card {
-  text-align: left;
-  margin: 1rem auto;
-  max-width: 50rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 0.5rem 1rem;
-  //   border: 1px solid gray;
-  border-radius: 8px;
-  //   background-color: rgb(173, 172, 172);
-  background-color: #b9b4c7;
+  //   max-height: 30rem;
+  border-radius: 20px;
+  background-color: #a4d9d0;
   box-shadow: 0px 10px 20px rgba(190, 189, 189, 0.4);
+  //   min-height: 100%;
 }
 
 .title-author {
@@ -20,21 +23,21 @@
 }
 
 .rating-info-container {
-  display: flex;
+  //   display: flex;
   align-items: center;
 }
 
 .comment-container {
-  display: flex;
+  flex-grow: 1;
   //   gap: 0.2rem;
 }
 
 .comment-icon {
-  margin: 0.2rem;
-  filter: invert(30%) sepia(2%) saturate(11%) hue-rotate(323deg) brightness(99%)
+  //   margin: 0.2rem;
+  filter: invert(30%) sepia(2%) saturate(11%) hue-rotate(323deg) brightness(40%)
     contrast(74%);
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.7rem;
+  height: 1.7rem;
 }
 
 .comment-info {
@@ -45,7 +48,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 3em;
+  //   max-height: 3em;
   line-height: 1.5em;
   /* Future compatibility */
   line-clamp: 2; /* This will have no effect currently but is added for future-proofing */
@@ -61,8 +64,9 @@
 }
 
 .list-action-buttons button {
-  margin-right: 0.5rem;
-  width: 10rem;
+  margin-top: 0.5rem;
+  max-width: 5rem;
+  max-height: 2rem;
 }
 
 .edit-button {
@@ -77,4 +81,33 @@
     background-color: gray;
     color: white;
   }
+}
+
+//modal content
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 500px;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
