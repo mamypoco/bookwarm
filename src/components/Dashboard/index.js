@@ -1,23 +1,27 @@
-import "./index.scss";
-import { useState, useEffect } from "react";
-import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
-import { db } from "../../config/firebase";
-import { auth } from "../../config/firebase";
+import './index.scss';
+import { useState, useEffect } from 'react';
+import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore';
+import { db } from '../../config/firebase';
+import { auth } from '../../config/firebase';
 
-import Header from "./Header/header";
-import List from "./List/list";
-import Add from "./Add/add";
-import Edit from "./Edit/edit";
-import Swal from "sweetalert2";
+import Header from './Header/header';
+import List from './List/list';
+import Add from './Add/add';
+import Edit from './Edit/edit';
+import Swal from 'sweetalert2';
 
 const Dashboard = ({ setIsAuthenticated }) => {
   const [user, setUser] = useState(null);
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState('');
   const [bookList, setBookList] = useState();
   const [selectedBook, setSelectedBook] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [rating, setRating] = useState(null);
+  const [isCardModalActive, setIsCardModalActive] = useState(false);
+
+  const openModal = () => setIsCardModalActive(true);
+  const closeModal = () => setIsCardModalActive(false);
 
   // Fetch user's books
   const fetchBooks = async (userId) => {
@@ -33,7 +37,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
       }));
       setBookList(booksData);
     } catch (error) {
-      console.error("Error fetching books: ", error);
+      console.error('Error fetching books: ', error);
     }
   };
 
@@ -42,7 +46,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
       if (user) {
         setUser(user);
         if (user.displayName) {
-          setUserName(user.displayName.split(" ")[0]);
+          setUserName(user.displayName.split(' ')[0]);
         } else {
           setUserName(user.email);
         }
@@ -62,12 +66,12 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   const handleDelete = async (id) => {
     Swal.fire({
-      icon: "warning",
-      title: "Are you sure?",
+      icon: 'warning',
+      title: 'Are you sure?',
       text: "you won't be able to revert this!",
       showCancelButton: true,
-      confirmButtonText: "Yes, delete it",
-      cancelButtonText: "No, cancel",
+      confirmButtonText: 'Yes, delete it',
+      cancelButtonText: 'No, cancel',
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -75,8 +79,8 @@ const Dashboard = ({ setIsAuthenticated }) => {
           deleteDoc(doc(db, `users/${user.uid}/booksCollection`, id));
 
           Swal.fire({
-            icon: "Success",
-            title: "Deleted!",
+            icon: 'Success',
+            title: 'Deleted!',
             text: `${book.title} by ${book.author} is deleted.`,
             showConfirmButton: false,
             timer: 1500,
@@ -85,11 +89,11 @@ const Dashboard = ({ setIsAuthenticated }) => {
           const bookCopy = bookList.filter((book) => book.id !== id);
           setBookList(bookCopy);
         } catch (error) {
-          console.error("Error deleting book: ", error);
+          console.error('Error deleting book: ', error);
           Swal.fire({
-            icon: "error",
-            title: "error",
-            text: "There was a problem deleting the book.",
+            icon: 'error',
+            title: 'error',
+            text: 'There was a problem deleting the book.',
             showConfirmButton: true,
           });
         }
@@ -99,24 +103,28 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   return (
     <div className="dashboard-container">
-      {!isAdding && !isEditing && (
-        <div>
-          <div className="header-section">
-            <Header
-              userName={userName}
-              setIsAdding={setIsAdding}
-              setIsAuthenticated={setIsAuthenticated}
-            />
-          </div>
-          <div className="list-section">
-            <List
-              bookList={bookList}
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
-            />
-          </div>
+      {!isAdding && !isEditing && !isCardModalActive && (
+        <div className="header-section">
+          <Header
+            userName={userName}
+            setIsAdding={setIsAdding}
+            setIsAuthenticated={setIsAuthenticated}
+          />
         </div>
       )}
+      {!isAdding && !isEditing && (
+        <div className="list-section">
+          <List
+            bookList={bookList}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            openModal={openModal}
+            closeModal={closeModal}
+            isCardModalActive={isCardModalActive}
+          />
+        </div>
+      )}
+
       {isAdding && (
         <Add
           setIsAdding={setIsAdding}

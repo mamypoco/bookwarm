@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 // body {
 //   margin: 0;
@@ -9,12 +9,14 @@
 //   -moz-osx-font-smoothing: grayscale;
 // }
 
-body,
+body {
+  font-family: 'Raleway', 'ヒラギノ角ゴ Pro W3', 'Noto Sans JP', ans-serif;
+}
 button,
 input,
 select,
 textarea {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-weight: 500;
   font-size: 1rem;
   -webkit-font-smoothing: antialiased;
@@ -32,6 +34,6 @@ textarea {
 // }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }

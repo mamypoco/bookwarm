@@ -3,10 +3,9 @@
 //   text-align: center;
 // }
 
-body {
-  background-color: #f6e9b2;
-  //   height: 100%;
-}
+// body {
+//   background-color: #f6e9b2;
+// }
 
 input,
 select,
@@ -18,7 +17,7 @@ textarea {
   width: 70%;
 }
 
-input[type="button"],
+input[type='button'],
 button {
   &:hover {
     cursor: pointer;

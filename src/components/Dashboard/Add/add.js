@@ -1,10 +1,10 @@
-import "./add.scss";
-import { useState } from "react";
-import { db, auth } from "../../../config/firebase";
-import { collection, addDoc } from "firebase/firestore";
-import Swal from "sweetalert2";
-import Rating from "../../Rating/rating";
-import Modal from "../../Modal/Modal";
+import './add.scss';
+import { useState } from 'react';
+import { db, auth } from '../../../config/firebase';
+import { collection, addDoc } from 'firebase/firestore';
+import Swal from 'sweetalert2';
+import Rating from '../../Rating/rating';
+import Modal from '../../Modal/Modal';
 
 const Add = ({
   bookList,
@@ -15,18 +15,18 @@ const Add = ({
   setRating,
 }) => {
   //add new book
-  const [date, setDate] = useState("");
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [genre, setGenre] = useState("");
-  const [lang, setLang] = useState("");
-  const [pages, setPages] = useState("");
-  const [format, setFormat] = useState("");
-  const [status, setStatus] = useState("");
+  const [date, setDate] = useState('');
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [genre, setGenre] = useState('');
+  const [lang, setLang] = useState('');
+  const [pages, setPages] = useState('');
+  const [format, setFormat] = useState('');
+  const [status, setStatus] = useState('');
   //   const [rating, setRating] = useState("");
-  const [sentiment, setSentiment] = useState("");
+  const [sentiment, setSentiment] = useState('');
 
-  const booksCollectionRef = collection(db, "books");
+  const booksCollectionRef = collection(db, 'books');
 
   const handleAdd = async (e) => {
     e.preventDefault();
@@ -48,7 +48,7 @@ const Add = ({
 
     const user = auth.currentUser;
     if (!user) {
-      console.error("user not found");
+      console.error('user not found');
       return;
     }
 
@@ -56,20 +56,20 @@ const Add = ({
       await addDoc(collection(db, `users/${user.uid}/booksCollection`), {
         ...newBook,
       });
-      console.log("document written with ID: ", booksCollectionRef.id, user);
+      console.log('document written with ID: ', booksCollectionRef.id, user);
 
       setBookList(bookList);
       setIsAdding(false);
       fetchBooks(user.uid);
       //  getBookList();
-      console.log("rating:", rating);
+      console.log('rating:', rating);
     } catch (error) {
-      console.error("Error adding document:", error);
+      console.error('Error adding document:', error);
     }
 
     Swal.fire({
-      icon: "success",
-      title: "Added!",
+      icon: 'success',
+      title: 'Added!',
       text: `${title} by ${author}'s data has been Added.`,
       showConfirmButton: false,
       timer: 1500,
@@ -147,7 +147,7 @@ const Add = ({
           placeholder="Your sentiment"
           onChange={(e) => setSentiment(e.target.value)}
           type="text"
-          rows={6}
+          rows={5}
           value={sentiment}
         />
         <div className="rating-container">

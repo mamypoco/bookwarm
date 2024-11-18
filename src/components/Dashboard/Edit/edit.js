@@ -1,10 +1,10 @@
-import "./edit.scss";
-import { useState } from "react";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../../config/firebase";
-import Swal from "sweetalert2";
-import Rating from "../../Rating/rating";
-import Modal from "../../Modal/Modal";
+import './edit.scss';
+import { useState } from 'react';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '../../../config/firebase';
+import Swal from 'sweetalert2';
+import Rating from '../../Rating/rating';
+import Modal from '../../Modal/Modal';
 
 const Edit = ({
   userId,
@@ -56,8 +56,8 @@ const Edit = ({
     fetchBooks(userId);
 
     Swal.fire({
-      icon: "success",
-      title: "Updated!",
+      icon: 'success',
+      title: 'Updated!',
       text: `${updatedBook.title} by ${updatedBook.author} has been updated.`,
       showConfirmButton: false,
       timer: 1500,
@@ -136,7 +136,7 @@ const Edit = ({
           placeholder="Your sentiment"
           onChange={(e) => setSentiment(e.target.value)}
           type="text"
-          rows={8}
+          rows={5}
           value={sentiment}
         />
         <div className="rating-container">

@@ -8,7 +8,7 @@ const BookModal = ({ book, onClose }) => {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2>
-          {book.title} by {book.author}
+          {book.title} <span className="regular-style">by</span> {book.author}
         </h2>
         <Rating rating={book.rating} readOnly={true} />
         <p>

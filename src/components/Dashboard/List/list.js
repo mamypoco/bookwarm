@@ -5,13 +5,20 @@ import commentIcon from '../../../assets/images/quote.png';
 import Rating from '../../Rating/rating';
 import BookModal from '../../BookModal/bookmodal';
 
-const List = ({ bookList, handleDelete, handleEdit }) => {
+const List = ({
+  bookList,
+  handleDelete,
+  handleEdit,
+  openModal,
+  closeModal,
+  isCardModalActive,
+}) => {
   const [isOverflowing, setIsOverflowing] = useState(false); //to check if the height is overflowing
-  const [isCardModalActive, setIsCardModalActive] = useState(false);
-  const [selectedBook, setSelectedBook] = useState(null); // state for selected book
+  //   const [isCardModalActive, setIsCardModalActive] = useState(false); //moving state up
+  const [isBookSelected, setIsBookSelected] = useState(null); // state for selected book
   const commentRef = useRef(null);
 
-  //checks if the total height of the content (scrollHeight) is greater than the visible height (clientHeight). If so, set the content is overflowing (not all is visible).
+  //checks if the total height of content (scrollHeight) is greater than the visible height (clientHeight). If so, set the content is overflowing (not all is visible).
   useEffect(() => {
     const element = commentRef.current;
     if (element && element.scrollHeight > element.clientHeight) {
@@ -20,13 +27,13 @@ const List = ({ bookList, handleDelete, handleEdit }) => {
   }, []);
 
   const openCardModal = (book) => {
-    setIsCardModalActive(true);
-    setSelectedBook(book);
+    setIsBookSelected(book);
+    openModal();
   };
 
   const closeCardModal = () => {
-    setIsCardModalActive(false);
-    setSelectedBook(null);
+    setIsBookSelected(null);
+    closeModal();
   };
 
   return (
@@ -84,8 +91,8 @@ const List = ({ bookList, handleDelete, handleEdit }) => {
         <Loading />
       )}
 
-      {isCardModalActive && selectedBook && (
-        <BookModal book={selectedBook} onClose={closeCardModal} />
+      {isCardModalActive && isBookSelected && (
+        <BookModal book={isBookSelected} onClose={closeCardModal} />
       )}
     </div>
   );
