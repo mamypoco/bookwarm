@@ -14,7 +14,7 @@ const List = ({
   isCardModalActive,
 }) => {
   const [isOverflowing, setIsOverflowing] = useState(false); //to check if the height is overflowing
-  //   const [isCardModalActive, setIsCardModalActive] = useState(false); //moving state up
+  //   const [isCardModalActive, setIsCardModalActive] = useState(false); //moving state up to Dashboard.
   const [isBookSelected, setIsBookSelected] = useState(null); // state for selected book
   const commentRef = useRef(null);
 
@@ -92,7 +92,11 @@ const List = ({
       )}
 
       {isCardModalActive && isBookSelected && (
-        <BookModal book={isBookSelected} onClose={closeCardModal} />
+        <BookModal
+          book={isBookSelected}
+          handleEdit={handleEdit}
+          onClose={() => closeCardModal()}
+        />
       )}
     </div>
   );

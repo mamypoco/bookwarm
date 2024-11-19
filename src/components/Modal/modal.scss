@@ -12,13 +12,13 @@
   align-items: flex-start;
   backdrop-filter: blur(5px);
   overflow-y: auto;
-  //   padding-top: 1rem;
+  padding-top: 1rem;
   z-index: 100;
 }
 
 .modalContainer {
   max-width: 31rem;
-  background-color: rgb(173, 187, 218);
+  background-color: #adbbda;
   padding: 0.5rem;
   border-radius: 10px;
   box-shadow: 0px 10px 20px rgb(0, 0, 0, 0.4);
@@ -27,7 +27,7 @@
   text-align: center;
   //   margin-top: 2rem;
   z-index: 101;
-  animation: slide-down 0.5s ease-out;
+  animation: slide-down 0.3s ease-in;
   max-height: 90vh;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
@@ -99,15 +99,15 @@
 
 .submitButton .cancelButton {
   //   padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
+  //   border: none;
+  border-radius: 10px;
   cursor: pointer;
 }
 
 .submitButton {
   background-color: black;
   color: white;
-  font-weight: 700;
+  //   font-weight: 700;
 }
 
 .cancelButton {

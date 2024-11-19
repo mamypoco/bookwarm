@@ -9,12 +9,18 @@
   align-items: center;
   justify-content: center;
   z-index: 10;
+
+  @media (min-width: 1700px) {
+    // For larger desktop screens
+    align-items: flex-start; // Align closer to the top
+    padding-top: 10rem; // Add space from the top
+  }
 }
 
 .modal-content {
   background: white;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 20px;
   width: 80%;
   max-width: 500px;
 }
@@ -23,9 +29,12 @@
   font-weight: 400;
 }
 
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
+.edit-button2:hover {
+  background-color: black;
+  color: white;
+}
+
+.close-button:hover {
+  background-color: rgb(151, 150, 150);
+  color: white;
 }

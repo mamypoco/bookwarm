@@ -13,6 +13,8 @@ const Edit = ({
   setBookList,
   setIsEditing,
   fetchBooks,
+  isCardModalActive,
+  closeModal,
 }) => {
   const id = selectedBook.id;
 
@@ -67,7 +69,9 @@ const Edit = ({
   return (
     <Modal
       title="Edit your book"
-      onClose={() => setIsEditing(false)}
+      onClose={
+        isCardModalActive ? () => closeModal() : () => setIsEditing(false)
+      }
       onSubmit={handleUpdate}
       submitText="Update"
     >

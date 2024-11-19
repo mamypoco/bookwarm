@@ -1,6 +1,13 @@
 .header-container {
   text-align: center;
   color: white;
+  //   background-color: rgba(0, 0, 0, 0.6);
+}
+
+.hide-header-container {
+  text-align: center;
+  color: white;
+  opacity: 0.5;
 }
 
 .header-add-button {
@@ -16,9 +23,12 @@
 .header-logout-button {
   width: 10rem;
   &:hover {
-    //  border: 1px solid black;
-    //
     background-color: gray;
     color: white;
   }
+}
+
+.header-action-buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

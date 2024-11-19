@@ -1,4 +1,4 @@
-import './index.scss';
+import './dashboard.scss';
 import { useState, useEffect } from 'react';
 import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../config/firebase';
@@ -10,7 +10,13 @@ import Add from './Add/add';
 import Edit from './Edit/edit';
 import Swal from 'sweetalert2';
 
-const Dashboard = ({ setIsAuthenticated }) => {
+const Dashboard = ({
+  setIsAuthenticated,
+  setIsCardModalActive,
+  isCardModalActive,
+  openModal,
+  closeModal,
+}) => {
   const [user, setUser] = useState(null);
   const [userName, setUserName] = useState('');
   const [bookList, setBookList] = useState();
@@ -18,10 +24,10 @@ const Dashboard = ({ setIsAuthenticated }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [rating, setRating] = useState(null);
-  const [isCardModalActive, setIsCardModalActive] = useState(false);
+  //   const [isCardModalActive, setIsCardModalActive] = useState(false); //moved state up from List.
 
-  const openModal = () => setIsCardModalActive(true);
-  const closeModal = () => setIsCardModalActive(false);
+  //   const openModal = () => setIsCardModalActive(true);
+  //   const closeModal = () => setIsCardModalActive(false);
 
   // Fetch user's books
   const fetchBooks = async (userId) => {
@@ -103,7 +109,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   return (
     <div className="dashboard-container">
-      {!isAdding && !isEditing && !isCardModalActive && (
+      {/* {!isAdding && !isEditing && !isCardModalActive && (
         <div className="header-section">
           <Header
             userName={userName}
@@ -111,17 +117,27 @@ const Dashboard = ({ setIsAuthenticated }) => {
             setIsAuthenticated={setIsAuthenticated}
           />
         </div>
-      )}
+      )} */}
       {!isAdding && !isEditing && (
-        <div className="list-section">
-          <List
-            bookList={bookList}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-            openModal={openModal}
-            closeModal={closeModal}
-            isCardModalActive={isCardModalActive}
-          />
+        <div>
+          <div className="header-section">
+            <Header
+              userName={userName}
+              setIsAdding={setIsAdding}
+              setIsAuthenticated={setIsAuthenticated}
+              isCardModalActive={isCardModalActive}
+            />
+          </div>
+          <div className="list-section">
+            <List
+              bookList={bookList}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+              openModal={openModal}
+              closeModal={closeModal}
+              isCardModalActive={isCardModalActive}
+            />
+          </div>
         </div>
       )}
 
@@ -145,6 +161,8 @@ const Dashboard = ({ setIsAuthenticated }) => {
           setIsEditing={setIsEditing}
           rating={rating}
           setRating={setRating}
+          closeModal={closeModal}
+          isCardModalActive={isCardModalActive}
         />
       )}
     </div>

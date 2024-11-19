@@ -1,6 +1,6 @@
-import React from "react";
-import "./modal.scss";
-import closeButton from "../../assets/icons/cross.png";
+import React from 'react';
+import './modal.scss';
+import closeButton from '../../assets/icons/cross.png';
 
 function Modal({ title, children, onClose, onSubmit, submitText }) {
   return (

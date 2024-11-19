@@ -1,7 +1,7 @@
 import './bookmodal.scss';
 import Rating from '../../components/Rating/rating';
 
-const BookModal = ({ book, onClose }) => {
+const BookModal = ({ book, onClose, handleEdit }) => {
   if (!book) return null;
 
   return (
@@ -19,7 +19,18 @@ const BookModal = ({ book, onClose }) => {
           {book.status} as of {book.date}
         </p>
         <p>Note: {book.sentiment}</p>
-        <button onClick={onClose}>Close</button>
+        <button
+          className="edit-button2"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleEdit(book.id);
+          }}
+        >
+          Edit
+        </button>
+        <button className="close-button" onClick={onClose}>
+          Close
+        </button>
       </div>
     </div>
   );
