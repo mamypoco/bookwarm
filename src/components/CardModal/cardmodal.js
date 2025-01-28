@@ -1,7 +1,7 @@
-import './bookmodal.scss';
+import './cardmodal.scss';
 import Rating from '../../components/Rating/rating';
 
-const BookModal = ({ book, onClose, handleEdit }) => {
+const CardModal = ({ book, onClose, handleEdit, openEditScreen }) => {
   if (!book) return null;
 
   return (
@@ -23,7 +23,7 @@ const BookModal = ({ book, onClose, handleEdit }) => {
           className="edit-button2"
           onClick={(e) => {
             e.stopPropagation();
-            handleEdit(book.id);
+            openEditScreen(book.id);
           }}
         >
           Edit
@@ -36,4 +36,4 @@ const BookModal = ({ book, onClose, handleEdit }) => {
   );
 };
 
-export default BookModal;
+export default CardModal;

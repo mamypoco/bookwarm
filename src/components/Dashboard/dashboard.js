@@ -12,10 +12,10 @@ import Swal from 'sweetalert2';
 
 const Dashboard = ({
   setIsAuthenticated,
-  setIsCardModalActive,
-  isCardModalActive,
-  openModal,
-  closeModal,
+  //   setIsCardModalActive,
+  //   isCardModalActive,
+  //   openModal,
+  //   closeModal,
 }) => {
   const [user, setUser] = useState(null);
   const [userName, setUserName] = useState('');
@@ -24,10 +24,21 @@ const Dashboard = ({
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [rating, setRating] = useState(null);
-  //   const [isCardModalActive, setIsCardModalActive] = useState(false); //moved state up from List.
+  const [isCardModalActive, setIsCardModalActive] = useState(false); //moved state up from List.
+  //   const [previousScreen, setPreviousScreen] = useState(null);
 
-  //   const openModal = () => setIsCardModalActive(true);
-  //   const closeModal = () => setIsCardModalActive(false);
+  const openCardModal = () => setIsCardModalActive(true);
+  const closeCardModal = () => setIsCardModalActive(false);
+
+  //   const openEditScreen = () => setIsEditing(true);
+
+  const openEditScreen = (id) => {
+    const [book] = bookList.filter((book) => book.id === id);
+    setSelectedBook(book);
+    setIsEditing(true);
+  };
+
+  const closeEditScreen = () => setIsEditing(false);
 
   // Fetch user's books
   const fetchBooks = async (userId) => {
@@ -63,12 +74,6 @@ const Dashboard = ({
     });
     return () => unsubscribe();
   }, []);
-
-  const handleEdit = (id) => {
-    const [book] = bookList.filter((book) => book.id === id);
-    setSelectedBook(book);
-    setIsEditing(true);
-  };
 
   const handleDelete = async (id) => {
     Swal.fire({
@@ -109,15 +114,6 @@ const Dashboard = ({
 
   return (
     <div className="dashboard-container">
-      {/* {!isAdding && !isEditing && !isCardModalActive && (
-        <div className="header-section">
-          <Header
-            userName={userName}
-            setIsAdding={setIsAdding}
-            setIsAuthenticated={setIsAuthenticated}
-          />
-        </div>
-      )} */}
       {!isAdding && !isEditing && (
         <div>
           <div className="header-section">
@@ -131,11 +127,12 @@ const Dashboard = ({
           <div className="list-section">
             <List
               bookList={bookList}
-              handleEdit={handleEdit}
+              openEditScreen={openEditScreen}
               handleDelete={handleDelete}
-              openModal={openModal}
-              closeModal={closeModal}
+              openCardModal={openCardModal}
+              closeCardModal={closeCardModal}
               isCardModalActive={isCardModalActive}
+              //   previousScreen={previousScreen}
             />
           </div>
         </div>
@@ -161,8 +158,10 @@ const Dashboard = ({
           setIsEditing={setIsEditing}
           rating={rating}
           setRating={setRating}
-          closeModal={closeModal}
+          closeModal={closeCardModal}
           isCardModalActive={isCardModalActive}
+          openEditScreen={openEditScreen}
+          closeEditScreen={closeEditScreen}
         />
       )}
     </div>

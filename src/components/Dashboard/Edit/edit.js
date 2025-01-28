@@ -15,6 +15,7 @@ const Edit = ({
   fetchBooks,
   isCardModalActive,
   closeModal,
+  closeEditScreen,
 }) => {
   const id = selectedBook.id;
 
@@ -69,9 +70,7 @@ const Edit = ({
   return (
     <Modal
       title="Edit your book"
-      onClose={
-        isCardModalActive ? () => closeModal() : () => setIsEditing(false)
-      }
+      onClose={() => closeEditScreen()}
       onSubmit={handleUpdate}
       submitText="Update"
     >
@@ -145,12 +144,7 @@ const Edit = ({
         />
         <div className="rating-container">
           <p>Your rating:</p>
-          <Rating
-            rating={rating}
-            setRating={setRating}
-            // currentRating={rating}
-            // handleOnChange={(e) => setRating(Number(e.target.value))}
-          />
+          <Rating rating={rating} setRating={setRating} />
         </div>
       </form>
     </Modal>

@@ -3,15 +3,17 @@ import { useState, useRef, useEffect } from 'react';
 import Loading from '../../Loading/loading';
 import commentIcon from '../../../assets/images/quote.png';
 import Rating from '../../Rating/rating';
-import BookModal from '../../BookModal/bookmodal';
+import CardModal from '../../CardModal/cardmodal';
 
 const List = ({
   bookList,
   handleDelete,
   handleEdit,
-  openModal,
-  closeModal,
+  openCardModal,
+  closeCardModal,
   isCardModalActive,
+  openEditScreen,
+  //   previousScreen,
 }) => {
   const [isOverflowing, setIsOverflowing] = useState(false); //to check if the height is overflowing
   //   const [isCardModalActive, setIsCardModalActive] = useState(false); //moving state up to Dashboard.
@@ -26,14 +28,14 @@ const List = ({
     }
   }, []);
 
-  const openCardModal = (book) => {
+  const openModal = (book) => {
     setIsBookSelected(book);
-    openModal();
+    openCardModal();
   };
 
-  const closeCardModal = () => {
+  const closeModal = () => {
     setIsBookSelected(null);
-    closeModal();
+    closeCardModal();
   };
 
   return (
@@ -43,7 +45,7 @@ const List = ({
           <div
             key={book.id}
             className="book-card"
-            onClick={() => openCardModal(book)}
+            onClick={() => openModal(book)}
           >
             <div className="title-author">
               {book.title} <span className="regular-style">by</span>{' '}
@@ -70,7 +72,7 @@ const List = ({
                 className="edit-button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleEdit(book.id);
+                  openEditScreen(book.id);
                 }}
               >
                 Edit
@@ -92,10 +94,10 @@ const List = ({
       )}
 
       {isCardModalActive && isBookSelected && (
-        <BookModal
+        <CardModal
           book={isBookSelected}
-          handleEdit={handleEdit}
-          onClose={() => closeCardModal()}
+          openEditScreen={openEditScreen}
+          onClose={() => closeModal()}
         />
       )}
     </div>
