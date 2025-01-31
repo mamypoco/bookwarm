@@ -13,9 +13,10 @@ const Edit = ({
   setBookList,
   setIsEditing,
   fetchBooks,
-  isCardModalActive,
-  closeModal,
-  closeEditScreen,
+  openCardModal,
+  isPreviouslyCard,
+  setIsPreviouslyCard,
+  book,
 }) => {
   const id = selectedBook.id;
 
@@ -67,10 +68,21 @@ const Edit = ({
     });
   };
 
+  //TO DO: open cardModal, but how?
+  const closeEditScreen = (book) => {
+    if (isPreviouslyCard) {
+      setIsPreviouslyCard(false);
+      if (book) {
+        openCardModal(book);
+      }
+    }
+    setIsEditing(false);
+  };
+
   return (
     <Modal
       title="Edit your book"
-      onClose={() => closeEditScreen()}
+      onClose={() => closeEditScreen(book)}
       onSubmit={handleUpdate}
       submitText="Update"
     >

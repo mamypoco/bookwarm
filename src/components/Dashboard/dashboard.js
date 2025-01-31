@@ -10,13 +10,7 @@ import Add from './Add/add';
 import Edit from './Edit/edit';
 import Swal from 'sweetalert2';
 
-const Dashboard = ({
-  setIsAuthenticated,
-  //   setIsCardModalActive,
-  //   isCardModalActive,
-  //   openModal,
-  //   closeModal,
-}) => {
+const Dashboard = ({ setIsAuthenticated }) => {
   const [user, setUser] = useState(null);
   const [userName, setUserName] = useState('');
   const [bookList, setBookList] = useState();
@@ -24,21 +18,28 @@ const Dashboard = ({
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [rating, setRating] = useState(null);
-  const [isCardModalActive, setIsCardModalActive] = useState(false); //moved state up from List.
-  //   const [previousScreen, setPreviousScreen] = useState(null);
+  const [isCardModalActive, setIsCardModalActive] = useState(false); //moved state up for header to set conditional css
+  const [isPreviouslyCard, setIsPreviouslyCard] = useState(false);
 
-  const openCardModal = () => setIsCardModalActive(true);
-  const closeCardModal = () => setIsCardModalActive(false);
-
-  //   const openEditScreen = () => setIsEditing(true);
+  //   const openCardModal = () => setIsCardModalActive(true);
+  //   const closeCardModal = () => setIsCardModalActive(false);
 
   const openEditScreen = (id) => {
+    if (isCardModalActive) {
+      setIsCardModalActive(false);
+      setIsPreviouslyCard(true);
+    }
     const [book] = bookList.filter((book) => book.id === id);
     setSelectedBook(book);
     setIsEditing(true);
   };
 
-  const closeEditScreen = () => setIsEditing(false);
+  //   const closeEditScreen = () => {
+  //     if (isPreviouslyCard) {
+  //       openCardModal();
+  //     }
+  //     setIsEditing(false);
+  //   };
 
   // Fetch user's books
   const fetchBooks = async (userId) => {
@@ -129,10 +130,12 @@ const Dashboard = ({
               bookList={bookList}
               openEditScreen={openEditScreen}
               handleDelete={handleDelete}
-              openCardModal={openCardModal}
-              closeCardModal={closeCardModal}
+              //   openCardModal={openCardModal}
+              //   closeCardModal={closeCardModal}
               isCardModalActive={isCardModalActive}
-              //   previousScreen={previousScreen}
+              setIsCardModalActive={setIsCardModalActive}
+              isPreviouslyCard={isPreviouslyCard}
+              setIsPreviouslyCard={setIsPreviouslyCard}
             />
           </div>
         </div>
@@ -158,10 +161,10 @@ const Dashboard = ({
           setIsEditing={setIsEditing}
           rating={rating}
           setRating={setRating}
-          closeModal={closeCardModal}
+          //  closeModal={closeCardModal}
           isCardModalActive={isCardModalActive}
           openEditScreen={openEditScreen}
-          closeEditScreen={closeEditScreen}
+          //  closeEditScreen={closeEditScreen}
         />
       )}
     </div>

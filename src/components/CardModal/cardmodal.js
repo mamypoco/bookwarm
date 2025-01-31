@@ -1,7 +1,7 @@
 import './cardmodal.scss';
 import Rating from '../../components/Rating/rating';
 
-const CardModal = ({ book, onClose, handleEdit, openEditScreen }) => {
+const CardModal = ({ book, onClose, openEditScreen }) => {
   if (!book) return null;
 
   return (

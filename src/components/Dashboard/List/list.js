@@ -8,14 +8,12 @@ import CardModal from '../../CardModal/cardmodal';
 const List = ({
   bookList,
   handleDelete,
-  handleEdit,
-  openCardModal,
-  closeCardModal,
   isCardModalActive,
+  setIsCardModalActive,
   openEditScreen,
-  //   previousScreen,
+  isPreviouslyCard,
 }) => {
-  const [isOverflowing, setIsOverflowing] = useState(false); //to check if the height is overflowing
+  const [isOverflowing, setIsOverflowing] = useState(false); //check if the height is overflowing
   //   const [isCardModalActive, setIsCardModalActive] = useState(false); //moving state up to Dashboard.
   const [isBookSelected, setIsBookSelected] = useState(null); // state for selected book
   const commentRef = useRef(null);
@@ -28,14 +26,14 @@ const List = ({
     }
   }, []);
 
-  const openModal = (book) => {
+  const openCardModal = (book) => {
     setIsBookSelected(book);
-    openCardModal();
+    setIsCardModalActive(true);
   };
 
-  const closeModal = () => {
+  const closeCardModal = () => {
     setIsBookSelected(null);
-    closeCardModal();
+    setIsCardModalActive(false);
   };
 
   return (
@@ -45,7 +43,7 @@ const List = ({
           <div
             key={book.id}
             className="book-card"
-            onClick={() => openModal(book)}
+            onClick={() => openCardModal(book)}
           >
             <div className="title-author">
               {book.title} <span className="regular-style">by</span>{' '}
@@ -93,13 +91,14 @@ const List = ({
         <Loading />
       )}
 
-      {isCardModalActive && isBookSelected && (
+      {(isCardModalActive && isBookSelected) ||
+      (isPreviouslyCard && isBookSelected) ? (
         <CardModal
           book={isBookSelected}
           openEditScreen={openEditScreen}
-          onClose={() => closeModal()}
+          onClose={() => closeCardModal()}
         />
-      )}
+      ) : null}
     </div>
   );
 };
